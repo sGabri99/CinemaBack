@@ -103,7 +103,7 @@ public class FilmController {
 			)
 		}
 	)
-	@GetMapping("/staff/film")
+	@GetMapping("/film")
 	public ResponseEntity<List<ResponseFilmDTO>> findAll() {
 		return ResponseEntity.ok(filmService.findAll());
 	}
@@ -137,7 +137,7 @@ public class FilmController {
 			)
 		}
 	)
-	@GetMapping("/staff/film/{id}")
+	@GetMapping("/film/{id}")
 	public ResponseEntity<ResponseFilmDTO> findById(
 			@PathVariable @Parameter(
 					name = "ID", 
@@ -187,7 +187,7 @@ public class FilmController {
 			)
 		}
 	)
-	@GetMapping("/staff/film/genere/{id}")
+	@GetMapping("/film/genere/{id}")
 	public ResponseEntity<List<ResponseFilmDTO>> findByIdGenere(
 			@PathVariable @Parameter(
 					name = "ID", 
@@ -322,7 +322,7 @@ public class FilmController {
 					)
 			}
 	)
-	@GetMapping("/staff/film/titolo")
+	@GetMapping("/film/titolo")
 	public ResponseEntity<List<LongOmdbResponseApiDTO>> findByTitolo(@RequestParam String titolo){
 		return ResponseEntity.ok().body(filmService.findByTitolo(titolo));
 	}
