@@ -1,0 +1,109 @@
+package org.elis.movieexplorer.service.jpa;
+
+import lombok.RequiredArgsConstructor;
+import org.elis.movieexplorer.dto.sala.request.EditSalaDTO;
+import org.elis.movieexplorer.dto.sala.request.InsertSalaDTO;
+import org.elis.movieexplorer.dto.sala.response.ResponseSalaDTO;
+import org.elis.movieexplorer.exception.definition.MEConflictException;
+import org.elis.movieexplorer.exception.definition.MENoContentException;
+import org.elis.movieexplorer.exception.definition.MENotFoundException;
+import org.elis.movieexplorer.mapper.SalaMapper;
+import org.elis.movieexplorer.model.Sala;
+import org.elis.movieexplorer.model.Spettacolo;
+import org.elis.movieexplorer.model.enums.Tipo;
+import org.elis.movieexplorer.repository.SalaRepository;
+import org.elis.movieexplorer.repository.SpettacoloRepository;
+import org.elis.movieexplorer.service.definition.SalaService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@ConditionalOnProperty(name = "service.impl", havingValue = "JPA")
+@RequiredArgsConstructor
+public class SalaServiceJPA implements SalaService {
+	private final SalaRepository repository;
+	private final SpettacoloRepository repositoryS;
+	private final SalaMapper mapper;	
+	
+	@Override
+	public ResponseSalaDTO insert(InsertSalaDTO dto) {
+		if(repository.findByNome(dto.getNome()).isPresent()) throw new MEConflictException("sala con nome '"+dto.getNome()+"' già esistente");
+		return mapper.toResponse(repository.save(mapper.fromInsert(dto)));
+	}
+
+	@Override
+	public List<ResponseSalaDTO> findAll() {
+		List<Sala> sale = repository.findAll();
+		if(sale.isEmpty()) throw new MENoContentException("la lista di sale è vuota");
+		return sale.stream()
+				.map(s -> mapper.toResponse(s))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public ResponseSalaDTO findById(Long id) {
+		Optional<Sala> optS = repository.findById(id);
+		Sala s = optS.orElseThrow(() -> new MENotFoundException("sala non trovata per id: " + id));
+		return mapper.toResponse(s);
+	}
+
+	@Override
+	public List<ResponseSalaDTO> findByTipo(Tipo tipo) {
+		List<Sala> sale = repository.findByTipo(tipo);
+		if(sale.isEmpty()) throw new MENoContentException("nessuna sala trovata per tipo: " + tipo);
+		return sale.stream()
+				   .map(s -> mapper.toResponse(s))
+				   .collect(Collectors.toList());
+	}
+	
+	@Override
+	public ResponseSalaDTO findByNome(String nome) {
+		Sala sala = repository.findByNome(nome)
+				.orElseThrow(() -> new MENotFoundException("sala non trovata per nome: " + nome));	
+		return mapper.toResponse(sala);
+	}
+
+	@Override
+	public ResponseSalaDTO editById(Long id, EditSalaDTO sMod) {
+		Optional<Sala> optS = repository.findById(id);		
+		Sala s = optS.orElseThrow(() -> new MENotFoundException("sala non trovata per id: " + id));
+
+		if(sMod.getNome() != null) {
+			if(repository.findByNome(sMod.getNome()).isPresent()) throw new MEConflictException("una sala con nome "+sMod.getNome()+" è già presente nel DB");
+			s.setNome(sMod.getNome());
+		}
+		if(sMod.getTipo() != null) 
+			s.setTipo(sMod.getTipo());
+		if(sMod.getNumeroPosti() != null)
+			s.setNumeroPosti(sMod.getNumeroPosti());
+		
+		if(sMod.getIdSpettacoli() != null) {
+			List<Spettacolo> spettacoliMod = new ArrayList<>();
+			for(Long i : sMod.getIdSpettacoli()) {
+				Optional<Spettacolo> spetOpt = repositoryS.findById(i);
+				Spettacolo spet = spetOpt.orElseThrow(() -> new MENotFoundException("spettacolo non trovato per id: " + i));
+				spettacoliMod.add(spet);
+			}
+			
+			if(spettacoliMod != s.getSpettacoli()) {
+				s.setSpettacoli(spettacoliMod);
+			}
+		}
+		
+		repository.save(s);
+		return mapper.toResponse(s);
+	}
+
+	@Override
+	public void removeById(Long id) {
+		Optional<Sala> optS = repository.findById(id);		
+		Sala s = optS.orElseThrow(() -> new MENotFoundException("sala non trovata per id: " + id));
+		repository.delete(s);
+	}
+
+}
