@@ -34,10 +34,14 @@ public class SalaMapper {
 	public ResponseSalaDTO toResponse(Sala s) {
 		ResponseSalaDTO dto = new ResponseSalaDTO();
 		dto.setId(s.getId());
-		dto.setNome(dto.getNome());
-		dto.setNumeroPosti(dto.getNumeroPosti());
-		dto.setTipo(dto.getTipo());
-		dto.setIdSpettacoli(dto.getIdSpettacoli());
+		dto.setNome(s.getNome());
+		dto.setNumeroPosti(s.getNumeroPosti());
+		dto.setTipo(s.getTipo());
+		if (s.getSpettacoli() != null) {
+	        dto.setIdSpettacoli(s.getSpettacoli().stream()
+	                .map(Spettacolo::getId)
+	                .toList());
+	    }
 		return dto;
 	}
 }
