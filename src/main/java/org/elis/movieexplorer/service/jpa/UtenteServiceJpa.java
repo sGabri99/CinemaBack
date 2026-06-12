@@ -69,6 +69,21 @@ public class UtenteServiceJpa implements UtenteService {
         return utenteMapper.toResponseList(utenti);
     }
 
+    
+    
+    
+    @Override
+    public List<ResponseUtenteDataDTO> findAllStaff() {
+    	List<Utente> staff = utenteRepository.findAllByRuolo(Ruolo.STAFF);
+    	return utenteMapper.toResponseList(staff);
+    }
+    
+    
+    
+    
+    
+    
+    
     @Override
     public ResponseUtenteDataDTO findById(Long id) {
         Optional<Utente> optional = utenteRepository.findById(id);

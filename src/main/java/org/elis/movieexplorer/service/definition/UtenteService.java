@@ -38,4 +38,6 @@ public interface UtenteService {
 
     ResetPasswordResponse editPassword(EditPasswordRequest request);
     ResetPasswordResponse resetPassword(ResetPasswordRequest request);
+
+	List<ResponseUtenteDataDTO> findAllStaff();
 }

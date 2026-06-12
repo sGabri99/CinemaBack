@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.elis.movieexplorer.dto.errore.ResponseErroreDTO;
 import org.elis.movieexplorer.dto.utente.request.InsertUtenteDTO;
 import org.elis.movieexplorer.dto.utente.request.LoginRequestDTO;
@@ -15,6 +18,7 @@ import org.elis.movieexplorer.dto.resetPassword.request.EditPasswordRequest;
 import org.elis.movieexplorer.dto.resetPassword.request.ResetPasswordRequest;
 import org.elis.movieexplorer.dto.resetPassword.response.ResetPasswordResponse;
 import org.elis.movieexplorer.dto.utente.response.ResponseUtenteDTO;
+import org.elis.movieexplorer.dto.utente.response.ResponseUtenteDataDTO;
 import org.elis.movieexplorer.model.Utente;
 import org.elis.movieexplorer.service.definition.UtenteService;
 import org.elis.movieexplorer.utility.BadRequestApiResponse;
@@ -113,6 +117,20 @@ public class UtenteController {
     public ResponseEntity<ResponseUtenteDTO> aggiungiStaff(@RequestBody @Valid InsertUtenteDTO request) {
         return ResponseEntity.ok(utenteService.insertStaff(request));
     }
+    
+   
+    
+    @GetMapping("/admin/lista_staff")
+    public ResponseEntity<List<ResponseUtenteDataDTO>> listaStaff() {
+        return ResponseEntity.ok(utenteService.findAllStaff());
+    }
+    
+    
+    
+    
+    
+    
+    
 
     @Tag(name = SwaggerTags.CUSTOMER_TAG, description = SwaggerTags.CUSTOMER_TAG_DESC)
     @Operation(
@@ -144,7 +162,7 @@ public class UtenteController {
         }
     )
     @BadRequestApiResponse
-    @PatchMapping("/cliente/edit_password")
+    @PatchMapping("/edit_password")
     public ResponseEntity<ResetPasswordResponse> editPassword( @RequestBody @Valid EditPasswordRequest request) {
     	
         return ResponseEntity.ok(utenteService.editPassword(request));
