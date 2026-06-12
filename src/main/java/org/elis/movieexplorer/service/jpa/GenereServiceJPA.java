@@ -79,13 +79,11 @@ public class GenereServiceJPA implements GenereService {
 		return mapper.toResponse(repository.save(g));
 	}
 
-	//Aggiunta if per vedere se ci sono film collegati a un genere
 	@Override
 	public void removeById(Long id) {
 		if(!repository.existsById(id)) 
 			throw new MENotFoundException("genere non trovato per id: "+id);
-		if(!repositoryF.findByIdGenere(id).isEmpty())
-			throw new MEConflictException("ci sono film collegati a questo genere");
+		repositoryF.removeGenereFromAllFilms(id);
 		repository.deleteById(id);
 	}
 }
