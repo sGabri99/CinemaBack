@@ -54,12 +54,29 @@ public class SpettacoloServiceJPA implements SpettacoloService{
 		
 		Sala sala = repositoryS.findById(dto.getIdSala()).orElseThrow(() -> new MENotFoundException("sala non trovata per id: " + dto.getIdSala()));
 		Film film = repositoryF.findById(dto.getIdFilm()).orElseThrow(() -> new MENotFoundException("film non trovato per id: " + dto.getIdFilm()));
-		Spettacolo s = mapper.fromInsert(dto, sala, film);
-		s=repository.save(s);
-		long quantiSpettacoli = repository.count();
-		System.out.println(">>> SPETTACOLI TOTALI NEL DB DOPO IL SALVATAGGIO: " + quantiSpettacoli);
 		
-	    return mapper.toResponse(s);
+		Spettacolo s = mapper.fromInsert(dto, sala, film);
+		
+		if(dto.getOraInizio() != null && dto.getOraFine() != null) {
+			s.setData(dto.getData());
+		}
+		
+		s.setPostiRimanenti((short) sala.getNumeroPosti());
+		
+		try {
+			s=repository.save(s);
+			
+			long quantiSpettacoli = repository.count();
+			System.out.println(">>> SPETTACOLI TOTALI NEL DB DOPO IL SALVATAGGIO: " + quantiSpettacoli);
+			
+		    return mapper.toResponse(s);
+		}catch(Exception e) {
+			System.out.println("Errore");
+			e.printStackTrace();
+			throw e;
+		}
+		
+		
 	}
 
 	@Override
