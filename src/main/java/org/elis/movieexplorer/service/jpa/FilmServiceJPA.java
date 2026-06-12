@@ -16,6 +16,7 @@ import org.elis.movieexplorer.model.Film;
 import org.elis.movieexplorer.model.Genere;
 import org.elis.movieexplorer.repository.FilmRepository;
 import org.elis.movieexplorer.repository.GenereRepository;
+import org.elis.movieexplorer.repository.SpettacoloRepository;
 import org.elis.movieexplorer.service.definition.FilmService;
 import org.elis.movieexplorer.service.omdb.OmdbService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -31,6 +32,7 @@ public class FilmServiceJPA implements FilmService {
 
 	private final FilmRepository repository;
 	private final GenereRepository repositoryG;
+	private final SpettacoloRepository spettacoloRepository;
 	private final FilmMapper mapper;
 	private final OmdbService omdbService;
 
@@ -103,6 +105,7 @@ public class FilmServiceJPA implements FilmService {
 		@SuppressWarnings("unused")
 		Film daRimuovere = repository.findById(id)
 			.orElseThrow(() -> new MENotFoundException("film non trovato per id: " + id));
+		spettacoloRepository.deleteAllByFilmId(id);
 		repository.deleteById(id);
 	}
 

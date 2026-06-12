@@ -16,8 +16,12 @@ public interface SpettacoloRepository extends JpaRepository<Spettacolo, Long> {
 	@Query("SELECT s FROM Spettacolo s WHERE s.data = :data ORDER BY s.oraInizio ASC")
 	List<Spettacolo> findByDataOrderByOraInizioAsc(LocalDate data);
 
-	@Modifying
+	
 	@Query("SELECT s FROM Spettacolo s WHERE s.film.id = :id")
 	List<Spettacolo> findByIdFilm(Long id);
+	
+	@Modifying
+	@Query("DELETE FROM Spettacolo s WHERE s.film.id = :id")
+	void deleteAllByFilmId(Long id);
 
 }
