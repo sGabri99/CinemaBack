@@ -43,5 +43,5 @@ public class LongOmdbResponseApiDTO {
     private String imdbRating;
 
     @JsonProperty("imdbID")
-    private String imdbId;
+    private String imdbID;
 }

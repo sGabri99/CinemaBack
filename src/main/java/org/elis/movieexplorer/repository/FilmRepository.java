@@ -21,5 +21,6 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 	@Transactional
 	@Query(value = "DELETE FROM film_generi WHERE generi_id = :idGenere", nativeQuery = true)
 	void removeGenereFromAllFilms(Long idGenere);
-
+	
+	boolean existsByImdbID(String imdbID);
 }

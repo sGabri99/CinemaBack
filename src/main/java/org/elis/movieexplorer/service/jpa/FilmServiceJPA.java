@@ -142,4 +142,9 @@ public class FilmServiceJPA implements FilmService {
 		
 		throw new MENoContentException("Nessun film trovato.");
 	}
+
+	@Override
+	public Boolean findByImdbID(String id) {
+		return repository.existsByImdbID(id);
+	}
 }

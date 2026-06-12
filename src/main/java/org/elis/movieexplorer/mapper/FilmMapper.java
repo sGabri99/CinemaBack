@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 public class FilmMapper {
 
 	public Film fromInsert(InsertFilmDTO dto, List<Genere> generi) {
-        return generateFilm(generi, dto.getTitolo(), dto.getDescrizione(), dto.getDurata(), dto.getAttori(), dto.getUrlLocandina());
+        return generateFilm(generi,dto.getImdbID() ,dto.getTitolo(), dto.getDescrizione(), dto.getDurata(), dto.getAttori(), dto.getUrlLocandina());
 	}
 	
 	public Film fromEdit(EditFilmDTO dto, List<Genere> generi, List<Spettacolo> spettacoli) {
-		Film f = generateFilm(generi, dto.getTitolo(), dto.getDescrizione(), dto.getDurata(), dto.getAttori(), dto.getUrlLocandina());
+		Film f = generateFilm(generi,null ,dto.getTitolo(), dto.getDescrizione(), dto.getDurata(), dto.getAttori(), dto.getUrlLocandina());
 		f.setSpettacoli(spettacoli);
 		return f;
 	}
@@ -37,8 +37,9 @@ public class FilmMapper {
 		return dto;
 	}
 
-	private Film generateFilm(List<Genere> generi, String titolo, String descrizione, Integer durata, String cast, String urlLocandina) {
+	private Film generateFilm(List<Genere> generi,String Imdb_id,String titolo, String descrizione, Integer durata, String cast, String urlLocandina) {
 		Film f = new Film();
+		f.setImdbID(Imdb_id);
 		f.setTitolo(titolo);
 		f.setDescrizione(descrizione);
 		f.setDurata(durata);

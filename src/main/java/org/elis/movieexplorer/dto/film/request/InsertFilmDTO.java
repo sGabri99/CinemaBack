@@ -27,6 +27,7 @@ public class InsertFilmDTO {
 	@NotNull
 	@Range(min = 0, max = 500)
 	private Integer durata;
+	private String imdbID;
 	@NotBlank
 	private String attori;
 	@NotBlank

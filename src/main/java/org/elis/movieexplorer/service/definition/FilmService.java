@@ -25,4 +25,6 @@ public interface FilmService {
 	void removeById(Long id);
 
     List<LongOmdbResponseApiDTO> findByTitolo(String titolo);
+
+	Boolean findByImdbID(String id);
 }

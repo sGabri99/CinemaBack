@@ -34,6 +34,9 @@ public class Film {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column( unique = true)
+	private String imdbID;
+	
 	@Column(nullable = false, unique = true)
 	@NotBlank
 	private String titolo;

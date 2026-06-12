@@ -326,4 +326,12 @@ public class FilmController {
 	public ResponseEntity<List<LongOmdbResponseApiDTO>> findByTitolo(@RequestParam String titolo){
 		return ResponseEntity.ok().body(filmService.findByTitolo(titolo));
 	}
+	
+	@GetMapping("/staff/film/check-exists")
+	public ResponseEntity<Boolean> findByIMDBID(@RequestParam String id){
+		
+		return ResponseEntity.ok(filmService.findByImdbID(id));
+	}
+	
+	
 }
