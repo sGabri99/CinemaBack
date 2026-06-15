@@ -20,6 +20,7 @@ public class BigliettoMapper {
 		bigliettoDTO.setId(biglietto.getId());
 		bigliettoDTO.setNomeUtente(biglietto.getUtente().getNome());
 		bigliettoDTO.setIdSpettacolo(biglietto.getSpettacolo().getId());
+		bigliettoDTO.setCodiceBiglietto(biglietto.getCodiceBiglietto());
 		return bigliettoDTO;
 	} 
 }

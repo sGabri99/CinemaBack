@@ -23,5 +23,6 @@ public class ResponseBigliettoDTO {
 	@EqualsAndHashCode.Exclude
 	private Long idSpettacolo;
 	
+	private String codiceBiglietto;
 	
 }

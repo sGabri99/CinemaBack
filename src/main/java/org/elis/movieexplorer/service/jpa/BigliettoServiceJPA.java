@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,7 +59,13 @@ public class BigliettoServiceJPA implements BigliettoService{
 		
 		List<Biglietto> bigliettiDaSalvare = new ArrayList<>();
 		for(int i = 0 ; i < richiesti ; i++) {
-			bigliettiDaSalvare.add(mapperB.fromInsertWithoutInsert(utente, spettacolo));
+			Biglietto b = mapperB.fromInsertWithoutInsert(utente, spettacolo);
+			String codice = UUID.randomUUID().toString().replace("-", "").substring(0, 12).toUpperCase();
+			b.setCodiceBiglietto(codice);
+			
+			
+			bigliettiDaSalvare.add(b);
+			
 		}
 		
 		List<Biglietto> salvati = repositoryB.saveAll(bigliettiDaSalvare);

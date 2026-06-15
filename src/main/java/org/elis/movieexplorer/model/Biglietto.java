@@ -1,5 +1,6 @@
 package org.elis.movieexplorer.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +29,10 @@ public class Biglietto {
 	@JoinColumn(nullable = false)
 	@NotNull
 	private Utente utente;
+	
+	@Column(nullable = false, unique = true)
+    private String codiceBiglietto;
+	
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)

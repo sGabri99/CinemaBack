@@ -203,4 +203,21 @@ public class BigliettoController {
 		bigliettoService.removeByIdEmail(id, email);
 		return ResponseEntity.ok().build();
 	}
+	
+	
+	
+	
+	
+	@GetMapping("/cliente/biglietto")
+	public ResponseEntity<List<ResponseBigliettoDTO>> getAll(Authentication authenticator){
+		Utente u = (Utente) authenticator.getPrincipal();
+		return ResponseEntity.ok(bigliettoService.findByIdUtente(u.getId()));
+	}
+	
+	
+	
+	
+	
+	
+	
 }
