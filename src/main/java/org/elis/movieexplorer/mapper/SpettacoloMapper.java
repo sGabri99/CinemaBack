@@ -73,6 +73,7 @@ public class SpettacoloMapper {
 		dto.setIdBiglietti(s.getBiglietti().stream().map(b -> b.getId()).collect(Collectors.toList()));
 		dto.setNomeSala(s.getSala().getNome());
 		dto.setNomeFilm(s.getFilm().getTitolo());
+		dto.setIdFilm(s.getFilm().getId());
 		return dto;
 	}
 	

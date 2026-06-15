@@ -46,4 +46,8 @@ public class ResponseSpettacoloDTO {
 	@EqualsAndHashCode.Exclude
 	@NotNull
 	private String nomeFilm;
+	
+	@EqualsAndHashCode.Exclude
+	@NotNull
+	private Long idFilm;
 }
