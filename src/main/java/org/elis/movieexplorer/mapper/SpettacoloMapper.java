@@ -19,23 +19,23 @@ import java.util.stream.Collectors;
 
 @Component
 public class SpettacoloMapper {
-	public Spettacolo fromInsert(InsertSpettacoloDTO dto, Sala sala, Film film) {
+	public Spettacolo fromInsert(InsertSpettacoloDTO dto, Sala sala, Film film, LocalDateTime oraFine) {
 		Spettacolo s = new Spettacolo();
 		s.setData(dto.getData());
 		s.setOraInizio(dto.getOraInizio());
-		s.setOraInizio(dto.getOraFine());
+		s.setOraFine(oraFine);
 		s.setPostiRimanenti(sala.getNumeroPosti());
 		s.setSala(sala);
 		s.setFilm(film);
 		return s;
 	}
-	
+
 	public List<Spettacolo> fromInsertList(InsertListSpettacoloDTO dto, Sala sala, Film film) {
 		List<Spettacolo> spettacoli = new ArrayList<>();
 		HashMap<LocalDateTime, LocalDateTime> orariInizioFine = dto.getOrariInizioFine();
-		
-		for(LocalDate data : dto.getDate()) {
-			for(LocalDateTime oraInizio : orariInizioFine.keySet()) {
+
+		for (LocalDate data : dto.getDate()) {
+			for (LocalDateTime oraInizio : orariInizioFine.keySet()) {
 				Spettacolo s = new Spettacolo();
 				s.setData(data);
 				s.setOraInizio(oraInizio);
@@ -43,14 +43,14 @@ public class SpettacoloMapper {
 				s.setPostiRimanenti(sala.getNumeroPosti());
 				s.setSala(sala);
 				s.setFilm(film);
-				
+
 				spettacoli.add(s);
 			}
 		}
 
 		return spettacoli;
 	}
-	
+
 	public Spettacolo fromEdit(EditSpettacoloDTO dto, Sala sala, Film film, List<Biglietto> biglietti) {
 		Spettacolo s = new Spettacolo();
 		s.setData(dto.getData());
@@ -62,7 +62,7 @@ public class SpettacoloMapper {
 		s.setFilm(film);
 		return s;
 	}
-	
+
 	public ResponseSpettacoloDTO toResponse(Spettacolo s) {
 		ResponseSpettacoloDTO dto = new ResponseSpettacoloDTO();
 		dto.setId(s.getId());
@@ -70,11 +70,10 @@ public class SpettacoloMapper {
 		dto.setOraInizio(s.getOraInizio());
 		dto.setOraFine(s.getOraFine());
 		dto.setPostiRimanenti(s.getPostiRimanenti());
-		dto.setIdBiglietti(s.getBiglietti().stream().map(b -> b.getId()).collect(Collectors.toList()));
+		dto.setIdBiglietti(s.getBiglietti().stream().map(Biglietto::getId).collect(Collectors.toList()));
 		dto.setNomeSala(s.getSala().getNome());
 		dto.setNomeFilm(s.getFilm().getTitolo());
 		dto.setIdFilm(s.getFilm().getId());
 		return dto;
 	}
-	
 }

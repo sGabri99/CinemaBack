@@ -29,16 +29,14 @@ public class SpettacoloTest extends GenericTest {
     private final MockMvc mockMvc;
     private final ObjectMapper mapper;
 
-    // Insert
     @Test
     @Jojo(jojoChar = "Johnny")
     @Dnd(classe = "Lottatore")
     @WithMockUser(authorities = "ROLE_Staff")
-    public void insertOk() throws Exception{
+    public void insertOk() throws Exception {
         InsertSpettacoloDTO dto = new InsertSpettacoloDTO();
         dto.setData(LocalDate.now().plusDays(5));
-        dto.setOraInizio(LocalDateTime.now());
-        dto.setOraFine(LocalDateTime.now().plusHours(3));
+        dto.setOraInizio(LocalDateTime.now().plusDays(5).withSecond(0).withNano(0));
         dto.setIdSala(1L);
         dto.setIdFilm(1L);
 
@@ -50,19 +48,19 @@ public class SpettacoloTest extends GenericTest {
                 .content(json);
 
         ResultMatcher status = MockMvcResultMatchers.status().isOk();
+        ResultMatcher oraFinePresente = MockMvcResultMatchers.jsonPath("$.oraFine").exists();
 
-        mockMvc.perform(request).andExpect(status);
+        mockMvc.perform(request).andExpectAll(status, oraFinePresente);
     }
 
     @Test
     @Jojo(jojoChar = "Jotaro")
     @Dnd(classe = "Stregone")
     @WithMockUser(authorities = "ROLE_Staff")
-    public void insertConflict() throws Exception{
+    public void insertConflict() throws Exception {
         InsertSpettacoloDTO dto = new InsertSpettacoloDTO();
         dto.setData(LocalDate.parse("2026-05-26"));
         dto.setOraInizio(LocalDateTime.parse("2026-05-26T19:30:00"));
-        dto.setOraFine(LocalDateTime.parse("2026-05-26T23:42:00"));
         dto.setIdSala(7L);
         dto.setIdFilm(14L);
 
@@ -81,11 +79,10 @@ public class SpettacoloTest extends GenericTest {
     @Jojo(jojoChar = "Joseph")
     @Dnd(classe = "Bardo")
     @WithMockUser(authorities = "ROLE_Staff")
-    public void insertBadRequest() throws Exception{
+    public void insertBadRequest() throws Exception {
         InsertSpettacoloDTO dto = new InsertSpettacoloDTO();
         dto.setData(LocalDate.now().plusDays(5));
-        dto.setOraInizio(LocalDateTime.now().plusDays(5));
-        dto.setOraFine(LocalDateTime.now().plusDays(4));
+        dto.setOraInizio(LocalDateTime.now().plusDays(4));
         dto.setIdSala(1L);
         dto.setIdFilm(1L);
 
@@ -100,11 +97,10 @@ public class SpettacoloTest extends GenericTest {
         mockMvc.perform(request).andExpect(status);
     }
 
-    // FindAll
     @Test
     @Jojo(jojoChar = "Jolyne")
     @Dnd(classe = "Monaco")
-    public void findAll2xx() throws Exception{
+    public void findAll2xx() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/spettacolo");
 
         ResultMatcher status = MockMvcResultMatchers.status().is2xxSuccessful();
@@ -113,13 +109,10 @@ public class SpettacoloTest extends GenericTest {
         mockMvc.perform(request).andExpectAll(status, isArray);
     }
 
-    // TODO test errore 204 (no conflict)
-
-    // FindByData
     @Test
     @Jojo(jojoChar = "Giorno")
     @Dnd(classe = "Paladino")
-    public void findByData2xx() throws Exception{
+    public void findByData2xx() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/spettacolo/2026-04-23");
 
         ResultMatcher status = MockMvcResultMatchers.status().is2xxSuccessful();
@@ -127,13 +120,10 @@ public class SpettacoloTest extends GenericTest {
         mockMvc.perform(request).andExpect(status);
     }
 
-    // TODO test errore 204 (no conflict)
-
-    // FindByFilmId
     @Test
     @Jojo(jojoChar = "Josuke")
     @Dnd(classe = "Barbaro")
-    public void findByFilmId2xx() throws Exception{
+    public void findByFilmId2xx() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/spettacolo/film/1");
 
         ResultMatcher status = MockMvcResultMatchers.status().is2xxSuccessful();
@@ -141,12 +131,11 @@ public class SpettacoloTest extends GenericTest {
         mockMvc.perform(request).andExpect(status);
     }
 
-    // EditById
     @Test
     @Jojo(jojoChar = "Jonathan")
     @Dnd(classe = "Stregone")
     @WithMockUser(authorities = "ROLE_Staff")
-    public void editByIdOk() throws Exception{
+    public void editByIdOk() throws Exception {
         EditSpettacoloDTO dto = new EditSpettacoloDTO();
         dto.setData(LocalDate.now().plusMonths(3));
         dto.setOraInizio(LocalDateTime.now().plusMonths(3));
@@ -167,7 +156,7 @@ public class SpettacoloTest extends GenericTest {
     @Jojo(jojoChar = "Jotaro")
     @Dnd(classe = "Bardo")
     @WithMockUser(authorities = "ROLE_Staff")
-    public void editByIdConflict() throws Exception{
+    public void editByIdConflict() throws Exception {
         EditSpettacoloDTO dto = new EditSpettacoloDTO();
         dto.setIdSala(2L);
 
@@ -186,7 +175,7 @@ public class SpettacoloTest extends GenericTest {
     @Jojo(jojoChar = "Johnny")
     @Dnd(classe = "Lottatore")
     @WithMockUser(authorities = "ROLE_Staff")
-    public void editByIdNotFound() throws Exception{
+    public void editByIdNotFound() throws Exception {
         EditSpettacoloDTO dto = new EditSpettacoloDTO();
         dto.setIdSala(2L);
 
@@ -205,8 +194,7 @@ public class SpettacoloTest extends GenericTest {
     @Jojo(jojoChar = "Josuke")
     @Dnd(classe = "Barbaro")
     @WithMockUser(authorities = "ROLE_Staff")
-    public void editByBadRequest() throws Exception{
-
+    public void editByBadRequest() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.patch("/staff/spettacolo/1")
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -215,12 +203,11 @@ public class SpettacoloTest extends GenericTest {
         mockMvc.perform(request).andExpect(status);
     }
 
-    // DeleteById
     @Test
     @Jojo(jojoChar = "Giorno")
     @Dnd(classe = "Monaco")
     @WithMockUser(authorities = "ROLE_Staff")
-    public void removeByIdOk() throws Exception{
+    public void removeByIdOk() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.delete("/staff/spettacolo/1")
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -232,9 +219,8 @@ public class SpettacoloTest extends GenericTest {
     @Test
     @Jojo(jojoChar = "Jolyne")
     @Dnd(classe = "Paladino")
-
     @WithMockUser(authorities = "ROLE_Staff")
-    public void removeById() throws Exception{
+    public void removeById() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.delete("/staff/spettacolo/200000000000")
                 .contentType(MediaType.APPLICATION_JSON);
 
