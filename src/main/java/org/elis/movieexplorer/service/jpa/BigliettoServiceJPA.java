@@ -101,8 +101,9 @@ public class BigliettoServiceJPA implements BigliettoService{
 		Utente utente = repositoryU.findUtenteByEmail(email).orElseThrow(() -> new MENotFoundException("utente non trovato"));
 		if(!utente.getBiglietti().contains(biglietto)) 
 			throw new MENotFoundException("biglietto non trovato tra i biglietti dell'utente");
-		if(LocalDateTime.now().isAfter(biglietto.getSpettacolo().getOraInizio()))
-			throw new MEPastTicketDeletionException("non è più possibile cancellare il biglietto");
+		LocalDateTime oraLimiteCancellazione = biglietto.getSpettacolo().getOraInizio().minusHours(1);
+		if(LocalDateTime.now().isAfter(oraLimiteCancellazione))
+			throw new MEPastTicketDeletionException("non è più possibile cancellare il biglietto a meno di un'ora dall'inizio dello spettacolo");
 		Spettacolo spettacolo = biglietto.getSpettacolo();
 		spettacolo.setPostiRimanenti((short) (spettacolo.getPostiRimanenti() + 1));
 		    
