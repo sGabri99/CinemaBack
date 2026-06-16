@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ResponseUtenteDataDTO {
+    private Long id;
+
     @NotBlank
     private String nome;
 

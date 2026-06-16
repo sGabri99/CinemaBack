@@ -116,7 +116,22 @@ public class UtenteServiceJpa implements UtenteService {
         Optional<Utente> optional = utenteRepository.findById(id);
         Utente u = optional.orElseThrow(() -> new MENotFoundException("Utente non trovato."));
         u.getBiglietti().forEach(b -> bigliettoService.removeBiglietto(b));
+        utenteRepository.delete(u);
         return new ResponseUtenteDTO("Utente eliminato con successo.");
+    }
+
+    @Override
+    @Transactional
+    public ResponseUtenteDTO removeStaffById(Long id) {
+        Optional<Utente> optional = utenteRepository.findById(id);
+        Utente u = optional.orElseThrow(() -> new MENotFoundException("Utente non trovato."));
+
+        if (u.getRuolo() != Ruolo.STAFF) {
+            throw new MEBadRequestException("Puoi eliminare solo utenti staff da questa sezione.");
+        }
+
+        utenteRepository.delete(u);
+        return new ResponseUtenteDTO("Staff eliminato con successo.");
     }
 
     @Override

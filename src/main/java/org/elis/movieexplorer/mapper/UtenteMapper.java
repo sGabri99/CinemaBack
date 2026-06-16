@@ -23,6 +23,7 @@ public class UtenteMapper {
         List<ResponseUtenteDataDTO> listResponse = new ArrayList<>();
         for(Utente u:utenti){
             ResponseUtenteDataDTO dto = new ResponseUtenteDataDTO();
+            dto.setId(u.getId());
             dto.setNome(u.getNome());
             dto.setCognome(u.getCognome());
             dto.setEmail(u.getEmail());
@@ -33,6 +34,7 @@ public class UtenteMapper {
 
     public ResponseUtenteDataDTO toResponseUtente(Utente u) {
         ResponseUtenteDataDTO dto = new ResponseUtenteDataDTO();
+        dto.setId(u.getId());
         dto.setNome(u.getNome());
         dto.setCognome(u.getCognome());
         dto.setEmail(u.getEmail());
