@@ -33,6 +33,8 @@ public class InsertFilmDTO {
 	@NotBlank
 	@URL
 	private String urlLocandina;
+	@URL
+	private String urlTrailer;
 	@NotEmpty
 	private List<Long> idGeneri;
 }

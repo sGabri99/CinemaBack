@@ -19,6 +19,7 @@ public class EditFilmDTO {
 	private Integer durata;
 	private String attori;
 	private String urlLocandina;
+	private String urlTrailer;
 	private List<Long> idGeneri;
 	private List<Long> idSpettacoli;
 }

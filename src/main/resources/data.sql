@@ -36,207 +36,227 @@ INSERT INTO sala (nome, numero_posti, tipo) VALUES ('Sala Nettuno',  250, 1);  -
 INSERT INTO sala (nome, numero_posti, tipo) VALUES ('Sala Mercurio',  80, 2);  -- 7 NORMALE
 
 -- ======================================
--- TABELLA: FILM (20 film)
+-- TABELLA: FILM (20 film) con url_trailer
 -- ======================================
 
 -- Film 1
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Il Cavaliere Oscuro',
     'Batman si trova ad affrontare il suo nemico più temibile: il Joker, un criminale psicopatico che vuole gettare Gotham City nel caos totale.',
     152,
     'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine, Maggie Gyllenhaal',
-    'https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg'
+    'https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
+    'https://www.youtube.com/watch?v=MnN9Q6v4VZM'
 );
 
 -- Film 2
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Inception',
     'Un ladro che ruba segreti aziendali attraverso la tecnologia di condivisione dei sogni riceve il compito inverso di impiantare un''idea nella mente di un CEO.',
     148,
     'Leonardo DiCaprio, Marion Cotillard, Tom Hardy, Ellen Page, Joseph Gordon-Levitt',
-    'https://image.tmdb.org/t/p/w500/8IB2e4r4oVhHnANbnm7O3Tj6tF8.jpg'
+    'https://image.tmdb.org/t/p/w500/8IB2e4r4oVhHnANbnm7O3Tj6tF8.jpg',
+    'https://www.youtube.com/watch?v=uEKYLoiYf7Y'
 );
 
 -- Film 3
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Interstellar',
     'Un gruppo di esploratori viaggia attraverso un wormhole nello spazio nel tentativo di garantire la sopravvivenza dell''umanità.',
     169,
     'Matthew McConaughey, Anne Hathaway, Jessica Chastain, Michael Caine, Matt Damon',
-    'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg'
+    'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
+    'https://www.youtube.com/watch?v=EIVMVIr3q3Y'
 );
 
 -- Film 4
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Il Padrino',
     'La storia della famiglia Corleone sotto il patriarca Vito Corleone, concentrandosi sulla trasformazione del figlio Michael da riluttante estraneo a spietato boss mafioso.',
     175,
     'Marlon Brando, Al Pacino, James Caan, Robert Duvall, Diane Keaton',
-    'https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg'
+    'https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg',
+    'https://www.youtube.com/watch?v=M25ExJp2_cQ'
 );
 
 -- Film 5
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Pulp Fiction',
     'Le vite di due sicari, un pugile, la moglie di un gangster e due rapinatori si intrecciano in quattro storie di violenza e redenzione.',
     154,
     'John Travolta, Samuel L. Jackson, Uma Thurman, Bruce Willis, Ving Rhames',
-    'https://image.tmdb.org/t/p/w500/dRbM4p27pFA3BDOjrp3bTBSP7bj.jpg'
+    'https://image.tmdb.org/t/p/w500/dRbM4p27pFA3BDOjrp3bTBSP7bj.jpg',
+    'https://www.youtube.com/watch?v=Y1krtVov-xM'
 );
 
 -- Film 6
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Matrix',
     'Un hacker informatico scopre dalla misteriosa ribelle Trinity che il mondo in cui vive è una simulazione creata dalle macchine.',
     136,
     'Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving, Joe Pantoliano',
-    'https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg'
+    'https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg',
+    'https://www.youtube.com/watch?v=IZZqY3qr4TI'
 );
 
 -- Film 7
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Forrest Gump',
     'Le presidenze di Kennedy e Johnson, la guerra del Vietnam e il Watergate si svolgono dal punto di vista di un uomo dell''Alabama con un QI di 75.',
     142,
     'Tom Hanks, Robin Wright, Gary Sinise, Sally Field, Mykelti Williamson',
-    'https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg'
+    'https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg',
+    'https://www.youtube.com/watch?v=XR_HsMDKN4w'
 );
 
 -- Film 8
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Avengers: Endgame',
     'Dopo gli eventi devastanti di Infinity War, gli Avengers si riuniscono per annullare le azioni di Thanos e ripristinare l''equilibrio nell''universo.',
     181,
     'Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth, Scarlett Johansson',
-    'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'
+    'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg',
+    'https://www.youtube.com/watch?v=CcoMZHqxA_U'
 );
 
 -- Film 9
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Il Signore degli Anelli: Il Ritorno del Re',
     'Gandalf e Aragorn guidano il Mondo degli Uomini contro l''esercito di Sauron mentre Frodo e Sam si avvicinano al Monte Fato con l''Unico Anello.',
     201,
     'Elijah Wood, Viggo Mortensen, Ian McKellen, Orlando Bloom, Sean Astin',
-    'https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg'
+    'https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg',
+    'https://www.youtube.com/watch?v=W7IVMGguox0'
 );
 
 -- Film 10
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Joker',
     'A Gotham City, il comico fallito Arthur Fleck viene spinto alla follia e diventa il criminale psicopatico noto come il Joker.',
     122,
     'Joaquin Phoenix, Robert De Niro, Zazie Beetz, Frances Conroy, Brett Cullen',
-    'https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg'
+    'https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg',
+    'https://www.youtube.com/watch?v=3BEujnSAu9k'
 );
 
 -- Film 11
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Spider-Man: No Way Home',
     'Peter Parker chiede aiuto al Doctor Strange per far dimenticare al mondo la sua identità segreta, ma l''incantesimo apre il multiverso.',
     148,
     'Tom Holland, Zendaya, Benedict Cumberbatch, Jacob Batalon, Jon Favreau',
-    'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg'
+    'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
+    'https://www.youtube.com/watch?v=ZBPAGbR6AHM'
 );
 
 -- Film 12
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Dune',
     'Il figlio di una famiglia nobile viene affidato alla protezione del pianeta desertico più prezioso dell''universo, ricco di una droga che allunga la vita.',
     155,
     'Timothée Chalamet, Rebecca Ferguson, Oscar Isaac, Josh Brolin, Zendaya',
-    'https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg'
+    'https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg',
+    'https://www.youtube.com/watch?v=tVbbaQDN5zs'
 );
 
 -- Film 13
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Toy Story 4',
     'Quando Bonnie aggiunge un riluttante giocattolo di nome Forky alla sua stanza, Woody scopre quanto grande possa essere il mondo per un giocattolo.',
     100,
     'Tom Hanks, Tim Allen, Annie Potts, Tony Hale, Keanu Reeves',
-    'https://image.tmdb.org/t/p/w500/w9kR8qbmQ01HwnvK4alvnQ2ca0L.jpg'
+    'https://image.tmdb.org/t/p/w500/w9kR8qbmQ01HwnvK4alvnQ2ca0L.jpg',
+    'https://www.youtube.com/watch?v=lb032q3C6z0'
 );
 
 -- Film 14
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Parasite',
     'L''avidità e la discriminazione di classe minacciano la relazione simbiotica appena formata tra la ricca famiglia Park e il clan impoverito dei Kim.',
     132,
     'Song Kang-ho, Lee Sun-kyun, Cho Yeo-jeong, Choi Woo-shik, Park So-dam',
-    'https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg'
+    'https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg',
+    'https://www.youtube.com/watch?v=iPOugEDF8tk'
 );
 
 -- Film 15
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Coco',
     'Aspirante musicista Miguel entra nella Terra dei Morti per trovare il suo bisnonno, un leggendario cantante, e scopre il vero valore della famiglia.',
     105,
     'Anthony Gonzalez, Gael García Bernal, Benjamin Bratt, Alanna Ubach, Renée Victor',
-    'https://image.tmdb.org/t/p/w500/gGEsBPAijhVUFoiNpgZXqRVWJt2.jpg'
+    'https://image.tmdb.org/t/p/w500/gGEsBPAijhVUFoiNpgZXqRVWJt2.jpg',
+    'https://www.youtube.com/watch?v=ro2mnwYOp50'
 );
 
 -- Film 16
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Oppenheimer',
     'La storia del fisico J. Robert Oppenheimer e del suo ruolo nello sviluppo della bomba atomica durante il Progetto Manhattan nella Seconda Guerra Mondiale.',
     180,
     'Cillian Murphy, Emily Blunt, Matt Damon, Robert Downey Jr., Florence Pugh',
-    'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg'
+    'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg',
+    'https://www.youtube.com/watch?v=tTcE_yRnANc'
 );
 
 -- Film 17
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Barbie',
     'Barbie e Ken vivono una vita perfetta a Barbieland. Quando però Barbie comincia ad avere pensieri sulla morte, parte per il mondo reale.',
     114,
     'Margot Robbie, Ryan Gosling, America Ferrera, Kate McKinnon, Issa Rae',
-    'https://image.tmdb.org/t/p/w500/iuFNMS8vlbSam1rm1LVHsezHMbT.jpg'
+    'https://image.tmdb.org/t/p/w500/iuFNMS8vlbSam1rm1LVHsezHMbT.jpg',
+    'https://www.youtube.com/watch?v=TA8B-yDTnZY'
 );
 
 -- Film 18
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Killers of the Flower Moon',
     'Negli anni ''20, i membri della tribù Osage vengono assassinati in circostanze misteriose, dando vita a una delle prime grandi indagini dell''FBI.',
     206,
     'Leonardo DiCaprio, Lily Gladstone, Robert De Niro, Jesse Plemons, Tantoo Cardinal',
-    'https://image.tmdb.org/t/p/w500/dB6aLSGXt6IYMF0u8o5tTpnfqMA.jpg'
+    'https://image.tmdb.org/t/p/w500/dB6aLSGXt6IYMF0u8o5tTpnfqMA.jpg',
+    'https://www.youtube.com/watch?v=VhzM66kYGVc'
 );
 
 -- Film 19
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Poor Things',
     'La straordinaria storia di Bella Baxter, una giovane donna riportata in vita dal brillante e non ortodosso scienziato Dr. Godwin Baxter.',
     141,
     'Emma Stone, Mark Ruffalo, Willem Dafoe, Ramy Youssef, Christopher Abbott',
-    'https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXIbpAlB1qRVWMd.jpg'
+    'https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXIbpAlB1qRVWMd.jpg',
+    'https://www.youtube.com/watch?v=aI8HQYIsV1A'
 );
 
 -- Film 20
-INSERT INTO film (titolo, descrizione, durata, attori, url_locandina)
+INSERT INTO film (titolo, descrizione, durata, attori, url_locandina, url_trailer)
 VALUES (
     'Past Lives',
     'Nora e Hae Sung, due amici d''infanzia profondamente legati in Corea del Sud, si ritrovano a New York dopo decenni di separazione e si confrontano con il destino.',
     106,
     'Greta Lee, Teo Yoo, John Magaro, Moon Seung-ah, Ji Hye Yoo',
-    'https://image.tmdb.org/t/p/w500/k3waqVXsnäskjfhaksjdh.jpg'
+    'https://image.tmdb.org/t/p/w500/k3waqVXsnäskjfhaksjdh.jpg',
+    'https://www.youtube.com/watch?v=xmO9q-fLZCs'
 );
 
 -- ======================================

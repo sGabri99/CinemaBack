@@ -46,6 +46,9 @@ public class ResponseFilmDTO {
 	@NotBlank
 	@URL
 	private String urlLocandina;
+
+	@EqualsAndHashCode.Exclude
+	private String urlTrailer;
 	
 	@EqualsAndHashCode.Exclude
 	@NotEmpty

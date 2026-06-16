@@ -58,6 +58,9 @@ public class Film {
 	@NotNull
 	@URL
 	private String urlLocandina;
+
+	@Column
+	private String urlTrailer;
 	
 	@ManyToMany
 	@NotEmpty

@@ -15,11 +15,14 @@ import org.springframework.stereotype.Component;
 public class FilmMapper {
 
 	public Film fromInsert(InsertFilmDTO dto, List<Genere> generi) {
-        return generateFilm(generi,dto.getImdbID() ,dto.getTitolo(), dto.getDescrizione(), dto.getDurata(), dto.getAttori(), dto.getUrlLocandina());
+		Film f = generateFilm(generi, dto.getImdbID(), dto.getTitolo(), dto.getDescrizione(), dto.getDurata(), dto.getAttori(), dto.getUrlLocandina());
+		f.setUrlTrailer(dto.getUrlTrailer());
+		return f;
 	}
-	
+
 	public Film fromEdit(EditFilmDTO dto, List<Genere> generi, List<Spettacolo> spettacoli) {
-		Film f = generateFilm(generi,null ,dto.getTitolo(), dto.getDescrizione(), dto.getDurata(), dto.getAttori(), dto.getUrlLocandina());
+		Film f = generateFilm(generi, null, dto.getTitolo(), dto.getDescrizione(), dto.getDurata(), dto.getAttori(), dto.getUrlLocandina());
+		f.setUrlTrailer(dto.getUrlTrailer());
 		f.setSpettacoli(spettacoli);
 		return f;
 	}
@@ -32,14 +35,14 @@ public class FilmMapper {
 		dto.setDurata(f.getDurata());
 		dto.setAttori(f.getAttori());
 		dto.setUrlLocandina(f.getUrlLocandina());
+		dto.setUrlTrailer(f.getUrlTrailer());
 		dto.setNomeGeneri(f.getGeneri().stream().map(g -> g.getNome()).collect(Collectors.toList()));
-
 		return dto;
 	}
 
-	private Film generateFilm(List<Genere> generi,String Imdb_id,String titolo, String descrizione, Integer durata, String cast, String urlLocandina) {
+	private Film generateFilm(List<Genere> generi, String imdbId, String titolo, String descrizione, Integer durata, String cast, String urlLocandina) {
 		Film f = new Film();
-		f.setImdbID(Imdb_id);
+		f.setImdbID(imdbId);
 		f.setTitolo(titolo);
 		f.setDescrizione(descrizione);
 		f.setDurata(durata);
