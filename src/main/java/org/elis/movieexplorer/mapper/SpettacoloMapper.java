@@ -70,7 +70,12 @@ public class SpettacoloMapper {
 		dto.setOraInizio(s.getOraInizio());
 		dto.setOraFine(s.getOraFine());
 		dto.setPostiRimanenti(s.getPostiRimanenti());
-		dto.setIdBiglietti(s.getBiglietti().stream().map(Biglietto::getId).collect(Collectors.toList()));
+		dto.setIdBiglietti(
+			    s.getBiglietti() == null ? new ArrayList<>() :
+			    s.getBiglietti().stream()
+			        .map(Biglietto::getId)
+			        .collect(Collectors.toList())
+			);
 		dto.setNomeSala(s.getSala().getNome());
 		dto.setNomeFilm(s.getFilm().getTitolo());
 		dto.setIdFilm(s.getFilm().getId());

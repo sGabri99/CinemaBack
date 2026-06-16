@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ import lombok.ToString;
 @ToString
 public class InsertListSpettacoloDTO {
 	@NotEmpty
-	private List<@Future LocalDate> date; // 1-2-3-6-7-8 di gennaio
+	private List<@FutureOrPresent LocalDate> date; // 1-2-3-6-7-8 di gennaio
 	
 	@NotEmpty
 	private HashMap<@Future LocalDateTime, @Future LocalDateTime> orariInizioFine; // (10-11.30) (12-14) (15-16.30) (17-18.30) orari

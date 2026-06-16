@@ -1,6 +1,7 @@
 package org.elis.movieexplorer.dto.spettacolo.response;
 
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -20,7 +21,7 @@ public class ResponseSpettacoloDTO {
 
 	@EqualsAndHashCode.Exclude
 	@NotNull
-	@Future
+	@FutureOrPresent
 	private LocalDate data;
 
 	@EqualsAndHashCode.Exclude
