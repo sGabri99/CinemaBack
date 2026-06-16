@@ -129,6 +129,11 @@ public class UtenteController {
     public ResponseEntity<ResponseUtenteDTO> eliminaStaff(@PathVariable Long id) {
         return ResponseEntity.ok(utenteService.removeStaffById(id));
     }
+
+    @DeleteMapping("/admin/staff")
+    public ResponseEntity<ResponseUtenteDTO> eliminaStaffByEmail(@RequestParam String email) {
+        return ResponseEntity.ok(utenteService.removeStaffByEmail(email));
+    }
     
     
     

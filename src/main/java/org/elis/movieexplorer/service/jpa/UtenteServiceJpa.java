@@ -135,6 +135,20 @@ public class UtenteServiceJpa implements UtenteService {
     }
 
     @Override
+    @Transactional
+    public ResponseUtenteDTO removeStaffByEmail(String email) {
+        Optional<Utente> optional = utenteRepository.findUtenteByEmail(email);
+        Utente u = optional.orElseThrow(() -> new MENotFoundException("Utente non trovato."));
+
+        if (u.getRuolo() != Ruolo.STAFF) {
+            throw new MEBadRequestException("Puoi eliminare solo utenti staff da questa sezione.");
+        }
+
+        utenteRepository.delete(u);
+        return new ResponseUtenteDTO("Staff eliminato con successo.");
+    }
+
+    @Override
     public String login(LoginRequestDTO request) {
         Optional<Utente> optional = utenteRepository.findUtenteByEmail(request.getEmail());
         Utente utente = optional.orElseThrow(() -> new MEBadRequestException("Password o email errate"));

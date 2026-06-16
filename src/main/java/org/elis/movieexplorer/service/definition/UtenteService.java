@@ -33,6 +33,8 @@ public interface UtenteService {
 
     ResponseUtenteDTO removeStaffById(Long id);
 
+    ResponseUtenteDTO removeStaffByEmail(String email);
+
     // UTILITY
     Boolean checkEmailAvailability(String email);
     
