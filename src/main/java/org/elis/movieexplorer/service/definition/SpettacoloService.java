@@ -2,12 +2,15 @@ package org.elis.movieexplorer.service.definition;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.math.BigDecimal;
 
 import org.elis.movieexplorer.dto.spettacolo.request.EditSpettacoloDTO;
 import org.elis.movieexplorer.dto.spettacolo.request.InsertSpettacoloDTO;
 import org.elis.movieexplorer.dto.spettacolo.response.ResponseSpettacoloDTO;
 
 public interface SpettacoloService {
+	Map<Long, BigDecimal> getFatturatoSpettacoli();
 	// CREATE
 	ResponseSpettacoloDTO insert(InsertSpettacoloDTO dto);
 	

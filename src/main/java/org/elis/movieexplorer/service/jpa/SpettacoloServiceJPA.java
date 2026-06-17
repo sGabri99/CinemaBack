@@ -21,9 +21,11 @@ import org.elis.movieexplorer.service.definition.SpettacoloService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -147,5 +149,17 @@ public class SpettacoloServiceJPA implements SpettacoloService {
 			repositoryB.deleteAll(biglietti);
 		}
 		repository.deleteById(id);
+	}
+
+	@Override
+	public Map<Long, BigDecimal> getFatturatoSpettacoli() {
+		List<Spettacolo> spettacoli = repository.findAll();
+		return spettacoli.stream().collect(Collectors.toMap(
+			Spettacolo::getId,
+			s -> s.getBiglietti() == null ? java.math.BigDecimal.ZERO :
+				s.getBiglietti().stream()
+					.map(Biglietto::getPrezzo)
+					.reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add)
+		));
 	}
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -25,4 +27,5 @@ public class ResponseBigliettoDTO {
 	
 	private String codiceBiglietto;
 	
+	private BigDecimal prezzo;
 }

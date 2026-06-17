@@ -257,4 +257,9 @@ public class SpettacoloController {
 		spettacoloService.removeById(id);
 		return ResponseEntity.ok().build();
 	}
+
+	@GetMapping("/admin/spettacolo/fatturato")
+	public ResponseEntity<java.util.Map<Long, java.math.BigDecimal>> getFatturatoSpettacoli() {
+		return ResponseEntity.ok(spettacoloService.getFatturatoSpettacoli());
+	}
 }
