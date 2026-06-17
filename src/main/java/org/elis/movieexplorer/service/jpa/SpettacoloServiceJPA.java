@@ -97,9 +97,7 @@ public class SpettacoloServiceJPA implements SpettacoloService {
 	@Override
 	public List<ResponseSpettacoloDTO> findByIdFilm(Long id) {
 		List<Spettacolo> spettacoli = repository.findByIdFilm(id);
-		if (spettacoli.isEmpty()) {
-			throw new MENoContentException("la lista di spettacoli è vuota per il film con id: " + id);
-		}
+	
 		return spettacoli.stream().map(mapper::toResponse).collect(Collectors.toList());
 	}
 
