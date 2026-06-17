@@ -111,32 +111,11 @@ public class FilmServiceJPA implements FilmService {
 
 	@Override
 	public List<LongOmdbResponseApiDTO> findByTitolo(String titolo){
-		List<Film> films = repository.findAll();
-		List<Film> daCercare = new ArrayList<>();
-		for(Film f:films){
-			if(f.getTitolo().toLowerCase().contains(titolo.toLowerCase())){
-				daCercare.add(f);
-			}
-		}
+	
 		
-		List<LongOmdbResponseApiDTO> longListResponse = new ArrayList<>();
-
-		if(!daCercare.isEmpty()){
-			for(Film f:daCercare){
-				LongOmdbResponseApiDTO longResponse = omdbService.getFilmOMDBAllDetails(f.getTitolo());
-				if(longResponse != null) {
-					longListResponse.add(longResponse);
-				}
-			}
-			return longListResponse;
-		}
-		
-		System.out.println(">>> Film non trovato nel DB local. Lo cerco su omdb.");
-		
-		LongOmdbResponseApiDTO omdbResponse = omdbService.getFilmOMDBAllDetails(titolo);
-		if(omdbResponse != null && omdbResponse.getTitle() != null) {
-			longListResponse.add(omdbResponse);
-			return longListResponse;
+		List<LongOmdbResponseApiDTO> omdbResponse = omdbService.getFilmOMDB(titolo,1);
+		if (omdbResponse != null) {
+			return omdbResponse;
 		}
 		
 		

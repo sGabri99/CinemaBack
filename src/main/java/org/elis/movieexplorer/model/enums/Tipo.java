@@ -1,18 +1,20 @@
 package org.elis.movieexplorer.model.enums;
 
+import java.math.BigDecimal;
+
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
 public enum Tipo {
-	TRED(15.0),
-	IMAX(10.0),
-	NORMALE(7.0);
+	TRED(BigDecimal.valueOf(15.0)),
+	IMAX(BigDecimal.valueOf(10.0)),
+	NORMALE(BigDecimal.valueOf(7.0));
 	
-	private final Double prezzo;
+	private final BigDecimal prezzo;
 	
-	Tipo(Double prezzo) {
+	Tipo(BigDecimal prezzo) {
 		this.prezzo = prezzo;
 	}
 }

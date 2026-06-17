@@ -72,7 +72,7 @@ public class BigliettoController {
 	@PostMapping("/cliente/biglietto")
 	public ResponseEntity<List<ResponseBigliettoDTO>> insert(@RequestBody @Valid InsertBigliettoDTO dto, Authentication authenticator){
 		Utente u = (Utente) authenticator.getPrincipal();
-		return ResponseEntity.ok(bigliettoService.insert(dto, u.getId()));
+		return ResponseEntity.ok(bigliettoService.insert(dto, u));
 	}
 
 	@Tag(name = SwaggerTags.STAFF_TAG, description = SwaggerTags.STAFF_TAG_DESC)

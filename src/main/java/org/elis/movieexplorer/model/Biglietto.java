@@ -1,5 +1,7 @@
 package org.elis.movieexplorer.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +35,8 @@ public class Biglietto {
 	@Column(nullable = false, unique = true)
     private String codiceBiglietto;
 	
+	@Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal prezzo;
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)

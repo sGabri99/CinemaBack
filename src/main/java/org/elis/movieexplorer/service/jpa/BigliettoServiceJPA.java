@@ -41,9 +41,8 @@ public class BigliettoServiceJPA implements BigliettoService{
 	
 	@Override
 	@Transactional
-	public List<ResponseBigliettoDTO> insert(InsertBigliettoDTO dto, Long id) {
-		Optional<Utente> oUtente = repositoryU.findById(id);
-		Utente utente = oUtente.orElseThrow(() -> new MENotFoundException("utente non trovato"));
+	public List<ResponseBigliettoDTO> insert(InsertBigliettoDTO dto, Utente utenteLoggato) {
+		
 		
 		Optional<Spettacolo> oSpettacolo = repositoryS.findById(dto.getIdSpettacolo());
 		Spettacolo spettacolo = oSpettacolo.orElseThrow(() -> new MENotFoundException("nessuno spettacolo trovato"));
@@ -59,7 +58,8 @@ public class BigliettoServiceJPA implements BigliettoService{
 		
 		List<Biglietto> bigliettiDaSalvare = new ArrayList<>();
 		for(int i = 0 ; i < richiesti ; i++) {
-			Biglietto b = mapperB.fromInsertWithoutInsert(utente, spettacolo);
+			Biglietto b = mapperB.fromInsertWithoutInsert(utenteLoggato, spettacolo);
+			b.setPrezzo(spettacolo.getSala().getTipo().getPrezzo());
 			String codice = UUID.randomUUID().toString().replace("-", "").substring(0, 12).toUpperCase();
 			b.setCodiceBiglietto(codice);
 			
