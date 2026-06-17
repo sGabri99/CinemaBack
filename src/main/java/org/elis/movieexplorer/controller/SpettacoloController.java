@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -259,7 +260,7 @@ public class SpettacoloController {
 	}
 
 	@GetMapping("/admin/spettacolo/fatturato")
-	public ResponseEntity<java.util.Map<Long, java.math.BigDecimal>> getFatturatoSpettacoli() {
+	public ResponseEntity<Map<Long, java.math.BigDecimal>> getFatturatoSpettacoli() {
 		return ResponseEntity.ok(spettacoloService.getFatturatoSpettacoli());
 	}
 }
