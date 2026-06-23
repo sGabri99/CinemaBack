@@ -13,10 +13,7 @@ import org.elis.movieexplorer.model.Biglietto;
 import org.elis.movieexplorer.model.Film;
 import org.elis.movieexplorer.model.Sala;
 import org.elis.movieexplorer.model.Spettacolo;
-import org.elis.movieexplorer.repository.BigliettoRepository;
-import org.elis.movieexplorer.repository.FilmRepository;
-import org.elis.movieexplorer.repository.SalaRepository;
-import org.elis.movieexplorer.repository.SpettacoloRepository;
+import org.elis.movieexplorer.repository.*;
 import org.elis.movieexplorer.service.definition.SpettacoloService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -37,6 +34,7 @@ public class SpettacoloServiceJPA implements SpettacoloService {
 	private final SalaRepository repositoryS;
 	private final FilmRepository repositoryF;
 	private final BigliettoRepository repositoryB;
+	private final PostoRepository repositoryP;
 	private final SpettacoloMapper mapper;
 
 	@Override
@@ -67,7 +65,8 @@ public class SpettacoloServiceJPA implements SpettacoloService {
 		}
 
 		Spettacolo spettacolo = mapper.fromInsert(dto, sala, film, oraFine);
-		spettacolo.setPostiRimanenti((short) sala.getNumeroPosti());
+
+		spettacolo.setPostiRimanenti(repositoryP.getNumeriPostiSala(sala.getId()));
 
 		return mapper.toResponse(repository.save(spettacolo));
 	}

@@ -21,6 +21,4 @@ public interface BigliettoService {
 	
 	// DELETE
 	void removeByIdEmail(Long idBiglietto, String email);
-
-	void removeBiglietto(Biglietto b);
 }
