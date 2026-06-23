@@ -71,6 +71,9 @@ public class Utente implements UserDetails {
 	@OneToMany( mappedBy = "mittente" )
 	private List<Messaggio> messaggi;
 	
+	@OneToMany( mappedBy = "chat" )
+	private List<Chat> chat;
+	
 	
 	
 	@Override
