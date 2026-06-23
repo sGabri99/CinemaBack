@@ -16,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -67,6 +68,10 @@ public class Utente implements UserDetails {
 	@OneToMany(mappedBy = "utente")
 	private List<Biglietto> biglietti;
 
+	@OneToMany( mappedBy = "mittente" )
+	private List<Messaggio> messaggi;
+	
+	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
