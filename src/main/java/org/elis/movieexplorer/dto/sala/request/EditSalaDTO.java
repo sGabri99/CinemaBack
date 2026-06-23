@@ -13,7 +13,5 @@ import java.util.List;
 @ToString
 public class EditSalaDTO {
 	private String nome;
-	private Short numeroPosti;
 	private Tipo tipo;
-	private List<Long> idSpettacoli;
 }

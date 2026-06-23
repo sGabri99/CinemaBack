@@ -26,11 +26,6 @@ public class Sala {
 	private String nome;
 	
 	@Column(nullable = false)
-	@Positive
-	@NotNull
-	private Short numeroPosti;
-	
-	@Column(nullable = false)
 	@NotNull
 	private Tipo tipo;
 	
