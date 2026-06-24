@@ -12,5 +12,7 @@ public interface MessaggioRepository extends JpaRepository<Messaggio, Long>{
 
 	@Query("SELECT m FROM Messaggio m WHERE m.chat.id = :id ORDER BY m.createdAt DESC ")
 	Optional<List<Messaggio>> findByChat( @Param("id") Long id );
-	
+
+	@Query("SELECT m FROM Messaggio m WHERE m.chat.id = :chatId ORDER BY m.createdAt DESC LIMIT 1")
+	Optional<Messaggio> findChatLastMessage(Long chatId);
 }
