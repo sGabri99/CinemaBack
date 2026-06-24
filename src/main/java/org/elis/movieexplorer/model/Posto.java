@@ -19,7 +19,7 @@ public class Posto {
 
     @NotNull
     @Min(0)
-	private int riga;
+	private int fila;
 
     @NotNull
     @Min(1)
