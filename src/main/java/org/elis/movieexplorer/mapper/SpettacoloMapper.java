@@ -24,7 +24,7 @@ public class SpettacoloMapper {
 		s.setData(dto.getData());
 		s.setOraInizio(dto.getOraInizio());
 		s.setOraFine(oraFine);
-		s.setPostiRimanenti(sala.getNumeroPosti());
+		s.setPostiRimanenti(sala.getPosti().size());
 		s.setSala(sala);
 		s.setFilm(film);
 		return s;
@@ -40,7 +40,7 @@ public class SpettacoloMapper {
 				s.setData(data);
 				s.setOraInizio(oraInizio);
 				s.setOraFine(orariInizioFine.get(oraInizio));
-				s.setPostiRimanenti(sala.getNumeroPosti());
+				s.setPostiRimanenti(sala.getPosti().size());
 				s.setSala(sala);
 				s.setFilm(film);
 

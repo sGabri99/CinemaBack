@@ -35,7 +35,7 @@ public class ResponseSpettacoloDTO {
 	
 	@EqualsAndHashCode.Exclude
 	@NotNull
-	private Short postiRimanenti;
+	private Integer postiRimanenti;
 	
 	@EqualsAndHashCode.Exclude
 	private List<Long> idBiglietti;
