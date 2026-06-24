@@ -11,7 +11,8 @@ import org.elis.movieexplorer.model.enums.Tipo;
 
 public interface SalaService {
 	// CREATE
-
+	ResponseSalaDTO insert(InsertSalaDTO dto);
+		
 	// READ
 	List<ResponseSalaDTO> findAll();
 		
@@ -21,7 +22,10 @@ public interface SalaService {
 	
 	ResponseSalaDTO findByNome(String nome);
 		
+		
 	// UPDATE
+	ResponseSalaDTO editById(Long id, EditSalaDTO sMod);
 		
 	// DELETE
+	void removeById(Long id);
 }
