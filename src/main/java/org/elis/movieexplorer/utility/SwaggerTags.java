@@ -21,6 +21,10 @@ public interface SwaggerTags {
 	
 	String GUEST_TAG_DESC = "Questo endpoint può essere chiamato anche da un utente non loggato";
 	
+	String LOGGATO_TAG = "Loggato";
+	
+	String LOGGATO_TAG_DESC = "Questo endpoint può essere chiamato da qualsiasi utente loggato";
+
 	
 	String ERROR_TAG = "Contiene percorso, messaggio e istante dell'errore";
 }
