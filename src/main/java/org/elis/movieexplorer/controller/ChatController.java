@@ -2,6 +2,7 @@ package org.elis.movieexplorer.controller;
 
 import java.util.List;
 
+import org.elis.movieexplorer.dto.chat.response.ResponseChatDTO;
 import org.elis.movieexplorer.model.Utente;
 import org.elis.movieexplorer.service.definition.ChatService;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class ChatController {
 
 	//recupero di tutte le proprie chat da parte dell'utente o recupero di tutte le chat da parte dello staff
 	@GetMapping("/user/chats")
-	public ResponseEntity<List<ResponseChatDTO>> listaChat(Authentication authenticator) {
+	public ResponseEntity<List<ResponseInfoChatDTO>> listaChat(Authentication authenticator) {
 		Utente u=(Utente) authenticator.getPrincipal();
 
 		return ResponseEntity.ok(chatService.findAllChats(u));
