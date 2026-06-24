@@ -2,6 +2,10 @@ package org.elis.movieexplorer.controller;
 
 import java.util.List;
 
+import org.elis.movieexplorer.dto.chat.response.ResponseChatDTO;
+import org.elis.movieexplorer.dto.chat.response.ResponseInfoChatDTO;
+import org.elis.movieexplorer.dto.message.request.InsertMessaggioDTO;
+import org.elis.movieexplorer.service.definition.ChatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,12 +39,23 @@ public ResponseEntity<String> inviaMessaggio(@RequestBody @Valid InsertMessageDT
 //recupero di tutte le proprie chat da parte dell'utente o recupero di tutte le chat da parte dello staff
 @GetMapping("/user/chat")
 public ResponseEntity<List<ResponseChatDTO>> listaChat(Authentication authenticator){
+
+	@PostMapping("/inviamessaggio")
+public ResponseEntity<String> inviaMessaggio(@RequestBody @Valid InsertMessaggioDTO dto, Authentication authenticator){
+	
+}
+	
+	
+@GetMapping("/cliente/chat")
+public ResponseEntity<List<ResponseInfoChatDTO>> listaChat(Authentication authenticator){
 	
 	
 }
-
 @GetMapping("/user/chat/{id}")
 public ResponseEntity<ResponseChatDTO> singolaChat(@PathVariable Long id, Authentication authenticator){
+
+@GetMapping("/staff/chat")
+public ResponseEntity<List<ResponseInfoChatDTO>> listaChat(){
 	
 }
 

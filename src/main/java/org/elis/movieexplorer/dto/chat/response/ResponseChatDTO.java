@@ -1,21 +1,12 @@
 package org.elis.movieexplorer.dto.chat.response;
 
-import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+import org.elis.movieexplorer.dto.message.response.ResponseMessaggioDTO;
+
 public class ResponseChatDTO {
-	private Long id;
 	
-	private String oggetto;
+	private ResponseInfoChatDTO chat;
 	
-	private String stato;
-	
-	private LocalDateTime createdAt;
-	
-	private Long utenteId;
+	private List<ResponseMessaggioDTO> messaggi;
 }
