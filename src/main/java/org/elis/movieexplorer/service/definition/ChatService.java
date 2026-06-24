@@ -9,17 +9,16 @@ import org.elis.movieexplorer.model.Utente;
 
 public interface ChatService {
 
-	ResponseChatDTO insertChat(CreateChatDTO dto, Utente utente);
+	void insertChat(CreateChatDTO dto, Utente utente);
 
-	ResponseMessageDTO insertMessage(InsertMessageDTO dto, Utente utente);
+	void insertMessage(InsertMessageDTO dto, Utente utente);
 
-	List<ResponseChatDTO> findAllChats();
+	List<ResponseChatDTO> findAllChats(Utente u);
 
-	List<ResponseChatDTO> findAllChatsByUtente(Long utenteId);
 
-	ResponseChatDTO findChatById(Long idChat);
+	ResponseChatDTO findChatById(Long idChat, Utente utente);
 
 	ResponseChatDTO cambiaStatoChat(Long idChat);
 	
-	Integer countNotRead(Utente u); 
+	Integer countNotRead(Utente utente); 
 }
