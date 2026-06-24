@@ -21,5 +21,5 @@ public interface ChatService {
 
 	ResponseChatDTO cambiaStatoChat(Long idChat);
 	
-	Integer countNotRead() 
+	Integer countNotRead(Utente u); 
 }
