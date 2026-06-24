@@ -1,5 +1,6 @@
 package org.elis.movieexplorer.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.movieexplorer.dto.biglietto.request.InsertBigliettoDTO;
@@ -13,12 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class BigliettoMapper {
 	
-	// ???
-	public Biglietto fromInsertWithoutInsert(List<Posto> posti, Spettacolo spettacolo) {
-		Biglietto b = new Biglietto();
-		b.setPosti(posti);
-		b.setSpettacolo(spettacolo);
-		return b;	
+
+	public List<Biglietto> fromInsertWithoutInsert(List<Posto> posti, Spettacolo spettacolo) {
+		List<Biglietto> biglietti = new ArrayList<>(); 
+		for(Posto p : posti) {
+			Biglietto b = new Biglietto();
+			b.setPosto(p);
+			b.setSpettacolo(spettacolo);
+			biglietti.add(b);
+		}
+		return biglietti;	
 	}
 	
 	
