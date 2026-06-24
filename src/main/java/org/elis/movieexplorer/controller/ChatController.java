@@ -2,14 +2,16 @@ package org.elis.movieexplorer.controller;
 
 import java.util.List;
 
+import org.elis.movieexplorer.dto.chat.request.InsertChatDTO;
 import org.elis.movieexplorer.dto.chat.response.ResponseChatDTO;
+import org.elis.movieexplorer.dto.chat.response.ResponseInfoChatDTO;
+import org.elis.movieexplorer.dto.message.request.InsertMessageDTO;
 import org.elis.movieexplorer.model.Utente;
 import org.elis.movieexplorer.service.definition.ChatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +29,7 @@ public class ChatController {
 
 	//creazione da parte dell'utente di una chat
 	@PostMapping("/cliente/chat")
-	public ResponseEntity<Void> creaChat(@RequestBody @Valid CreateChatDTO dto, Authentication authenticator) {
+	public ResponseEntity<Void> creaChat(@RequestBody @Valid InsertChatDTO dto, Authentication authenticator) {
 		Utente u=(Utente) authenticator.getPrincipal();
 		chatService.insertChat(dto, u);
 		return ResponseEntity.ok().build();
