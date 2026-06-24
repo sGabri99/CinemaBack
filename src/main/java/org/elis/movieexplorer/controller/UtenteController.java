@@ -117,9 +117,7 @@ public class UtenteController {
     public ResponseEntity<ResponseUtenteDTO> aggiungiStaff(@RequestBody @Valid InsertUtenteDTO request) {
         return ResponseEntity.ok(utenteService.insertStaff(request));
     }
-    
-   
-    
+
     @GetMapping("/admin/lista_staff")
     public ResponseEntity<List<ResponseUtenteDataDTO>> listaStaff() {
         return ResponseEntity.ok(utenteService.findAllStaff());
@@ -134,13 +132,6 @@ public class UtenteController {
     public ResponseEntity<ResponseUtenteDTO> eliminaStaffByEmail(@RequestParam String email) {
         return ResponseEntity.ok(utenteService.removeStaffByEmail(email));
     }
-    
-    
-    
-    
-    
-    
-    
 
     @Tag(name = SwaggerTags.CUSTOMER_TAG, description = SwaggerTags.CUSTOMER_TAG_DESC)
     @Operation(
