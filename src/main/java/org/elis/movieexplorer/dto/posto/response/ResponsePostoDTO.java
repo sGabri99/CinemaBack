@@ -1,0 +1,29 @@
+package org.elis.movieexplorer.dto.posto.response;
+
+import java.util.List;
+
+import org.elis.movieexplorer.model.enums.Tipo;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import lombok.*;
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
+public class ResponsePostoDTO {
+	
+	@NotNull
+    @Min(1)
+    private Integer colonna;
+
+    @NotNull
+    @Pattern(regexp = "^[A-Z]$")
+    private String fila;
+
+    @NotNull
+    private boolean occupato;
+
+}

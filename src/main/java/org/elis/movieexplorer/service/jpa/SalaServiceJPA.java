@@ -1,23 +1,17 @@
 package org.elis.movieexplorer.service.jpa;
 
 import lombok.RequiredArgsConstructor;
-import org.elis.movieexplorer.dto.sala.request.EditSalaDTO;
-import org.elis.movieexplorer.dto.sala.request.InsertSalaDTO;
 import org.elis.movieexplorer.dto.sala.response.ResponseSalaDTO;
-import org.elis.movieexplorer.exception.definition.MEConflictException;
 import org.elis.movieexplorer.exception.definition.MENoContentException;
 import org.elis.movieexplorer.exception.definition.MENotFoundException;
 import org.elis.movieexplorer.mapper.SalaMapper;
 import org.elis.movieexplorer.model.Sala;
-import org.elis.movieexplorer.model.Spettacolo;
 import org.elis.movieexplorer.model.enums.Tipo;
 import org.elis.movieexplorer.repository.SalaRepository;
-import org.elis.movieexplorer.repository.SpettacoloRepository;
 import org.elis.movieexplorer.service.definition.SalaService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,14 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SalaServiceJPA implements SalaService {
 	private final SalaRepository repository;
-	private final SpettacoloRepository repositoryS;
 	private final SalaMapper mapper;	
-	
-	@Override
-	public ResponseSalaDTO insert(InsertSalaDTO dto) {
-		if(repository.findByNome(dto.getNome()).isPresent()) throw new MEConflictException("sala con nome '"+dto.getNome()+"' già esistente");
-		return mapper.toResponse(repository.save(mapper.fromInsert(dto)));
-	}
 
 	@Override
 	public List<ResponseSalaDTO> findAll() {
@@ -66,29 +53,6 @@ public class SalaServiceJPA implements SalaService {
 		Sala sala = repository.findByNome(nome)
 				.orElseThrow(() -> new MENotFoundException("sala non trovata per nome: " + nome));	
 		return mapper.toResponse(sala);
-	}
-
-	@Override
-	public ResponseSalaDTO editById(Long id, EditSalaDTO sMod) {
-		Optional<Sala> optS = repository.findById(id);		
-		Sala s = optS.orElseThrow(() -> new MENotFoundException("sala non trovata per id: " + id));
-
-		if(sMod.getNome() != null) {
-			if(repository.findByNome(sMod.getNome()).isPresent()) throw new MEConflictException("una sala con nome "+sMod.getNome()+" è già presente nel DB");
-			s.setNome(sMod.getNome());
-		}
-		if(sMod.getTipo() != null) 
-			s.setTipo(sMod.getTipo());
-		
-		repository.save(s);
-		return mapper.toResponse(s);
-	}
-
-	@Override
-	public void removeById(Long id) {
-		Optional<Sala> optS = repository.findById(id);		
-		Sala s = optS.orElseThrow(() -> new MENotFoundException("sala non trovata per id: " + id));
-		repository.delete(s);
 	}
 
 }
