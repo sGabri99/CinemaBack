@@ -20,7 +20,6 @@ public class ResponsePostoBySpettacoloDTO {
     private Integer colonna;
 
     @NotNull
-    @Pattern(regexp = "^[A-Z]$")
     private String fila;
 
     @NotNull
