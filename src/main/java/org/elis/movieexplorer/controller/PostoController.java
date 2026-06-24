@@ -60,7 +60,7 @@ public class PostoController {
 	@BadRequestApiResponse
 	@GetMapping("/staff/posto/{idSala}")
 	public ResponseEntity<List<ResponsePostoBySalaDTO>> findByIdSala(@PathVariable Long idSala) {
-		return ResponseEntity.ok(postoService.findByIdSala(idSala));
+		return ResponseEntity.ok(postoService.findBySala(idSala));
 	}
 	
 	
@@ -96,7 +96,7 @@ public class PostoController {
 	@BadRequestApiResponse
 	@GetMapping("/cliente/posto/{idSpettacolo}")
 	public ResponseEntity<List<ResponsePostoBySpettacoloDTO>> findByIdSpettacolo(@PathVariable Long idSpettacolo) {
-		return ResponseEntity.ok(postoService.findByIdSpettacolo(idSpettacolo));
+		return ResponseEntity.ok(postoService.findBySpettacolo(idSpettacolo));
 	}
 	
 }

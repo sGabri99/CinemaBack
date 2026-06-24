@@ -7,7 +7,7 @@ import java.util.Set;
 import org.elis.movieexplorer.dto.posto.response.ResponsePostoBySalaDTO;
 import org.elis.movieexplorer.dto.posto.response.ResponsePostoBySpettacoloDTO;
 import org.elis.movieexplorer.model.Posto;
-import org.osgi.service.component.annotations.Component;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PostoMapper {

@@ -19,5 +19,5 @@ public interface ChatService {
 
 	void cambiaStatoChat(Long idChat);
 
-	Integer countNotRead(Utente u);
+	Integer countChatNotRead(Utente u);
 }

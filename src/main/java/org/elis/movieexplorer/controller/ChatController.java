@@ -124,7 +124,7 @@ public class ChatController {
 	@GetMapping("/user/contatore")
 	public ResponseEntity<Integer> contatoreChatNonLette(Authentication authenticator){
 		Utente u=(Utente) authenticator.getPrincipal();
-		return ResponseEntity.ok(chatService.countNotRead(u));
+		return ResponseEntity.ok(chatService.countChatNotRead(u));
 
 	}
 

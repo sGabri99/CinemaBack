@@ -34,40 +34,40 @@ import lombok.RequiredArgsConstructor;
 public class SalaController {
 	private final SalaService salaService;
 
-	@Tag(name = SwaggerTags.STAFF_TAG, description = SwaggerTags.STAFF_TAG_DESC)
-	@Operation(
-	    summary = "Inserimento sala",
-	    description = "Lo staff inserisce una nuova sala che viene creata e aggiunta al DB",
-	    responses = {
-	        @ApiResponse(
-	        	responseCode = "200",
-	        	description = "Sala creata",
-	        	content = @Content(
-	        		mediaType = MediaType.APPLICATION_JSON_VALUE,
-	        		schema = @Schema(
-	        			implementation = ResponseSalaDTO.class,
-	        			description = "Sala appena creata"
-	        		)
-	        	)
-	        ),
-	        @ApiResponse(
-	            responseCode = "409",
-	            description = "Nome sala già esistente",
-	            content = @Content(
-	            	mediaType = MediaType.APPLICATION_JSON_VALUE,
-	            	schema = @Schema(
-	            		implementation = ResponseErroreDTO.class,
-	            		description = SwaggerTags.ERROR_TAG
-	            	)
-	            )
-	        )
-	    }     
-	)
-	@BadRequestApiResponse
-	@PostMapping("/staff/sala")
-	public ResponseEntity<ResponseSalaDTO> insert(@RequestBody @Valid InsertSalaDTO dto){
-		return ResponseEntity.ok(salaService.insert(dto));
-	}
+//	@Tag(name = SwaggerTags.STAFF_TAG, description = SwaggerTags.STAFF_TAG_DESC)
+//	@Operation(
+//	    summary = "Inserimento sala",
+//	    description = "Lo staff inserisce una nuova sala che viene creata e aggiunta al DB",
+//	    responses = {
+//	        @ApiResponse(
+//	        	responseCode = "200",
+//	        	description = "Sala creata",
+//	        	content = @Content(
+//	        		mediaType = MediaType.APPLICATION_JSON_VALUE,
+//	        		schema = @Schema(
+//	        			implementation = ResponseSalaDTO.class,
+//	        			description = "Sala appena creata"
+//	        		)
+//	        	)
+//	        ),
+//	        @ApiResponse(
+//	            responseCode = "409",
+//	            description = "Nome sala già esistente",
+//	            content = @Content(
+//	            	mediaType = MediaType.APPLICATION_JSON_VALUE,
+//	            	schema = @Schema(
+//	            		implementation = ResponseErroreDTO.class,
+//	            		description = SwaggerTags.ERROR_TAG
+//	            	)
+//	            )
+//	        )
+//	    }
+//	)
+//	@BadRequestApiResponse
+//	@PostMapping("/staff/sala")
+//	public ResponseEntity<ResponseSalaDTO> insert(@RequestBody @Valid InsertSalaDTO dto){
+//		return ResponseEntity.ok(salaService.insert(dto));
+//	}
 	
 	
 	
@@ -230,90 +230,90 @@ public class SalaController {
 	
 	
 	
-	@Tag(name = SwaggerTags.STAFF_TAG, description = SwaggerTags.STAFF_TAG_DESC)
-    @Operation(
-        summary = "Modifica sala",
-        description = "Lo staff modifica una sala in base al suo ID",
-        responses = {
-        	@ApiResponse(
-        		responseCode = "200",
-        		description = "Sala modificata",
-        		content = @Content(
-        			mediaType = MediaType.APPLICATION_JSON_VALUE,
-        			schema = @Schema(
-        				implementation = ResponseSalaDTO.class,
-        				description = "Sala con nuove modifiche"
-        			)
-        		)
-        	),
-        	@ApiResponse(
-            	responseCode = "404",
-            	description = "Sala o spettacolo non trovati",
-            	content = @Content(
-            		mediaType = MediaType.APPLICATION_JSON_VALUE,
-            		schema = @Schema(
-            			implementation = ResponseErroreDTO.class,
-            			description = SwaggerTags.ERROR_TAG
-            		)
-            	)
-            ),
-        	@ApiResponse(
-        		responseCode = "409",
-                description = "Nome sala già esistente",
-                content = @Content(
-                	mediaType = MediaType.APPLICATION_JSON_VALUE,
-                	schema = @Schema(
-                		implementation = ResponseErroreDTO.class,
-                		description = SwaggerTags.ERROR_TAG
-                	)
-                )
-            )
-        } 
-    )
-	@BadRequestApiResponse
-	@PatchMapping("/staff/sala/{id}")
-	public ResponseEntity<ResponseSalaDTO> editById(
-			@PathVariable @Parameter(
-					name = "ID", 
-					description = "ID della sala da modificare", 
-					required = true, 
-					allowEmptyValue = false) Long id, 
-			@RequestBody EditSalaDTO dto){
-		return ResponseEntity.ok(salaService.editById(id, dto));
-	}
+//	@Tag(name = SwaggerTags.STAFF_TAG, description = SwaggerTags.STAFF_TAG_DESC)
+//    @Operation(
+//        summary = "Modifica sala",
+//        description = "Lo staff modifica una sala in base al suo ID",
+//        responses = {
+//        	@ApiResponse(
+//        		responseCode = "200",
+//        		description = "Sala modificata",
+//        		content = @Content(
+//        			mediaType = MediaType.APPLICATION_JSON_VALUE,
+//        			schema = @Schema(
+//        				implementation = ResponseSalaDTO.class,
+//        				description = "Sala con nuove modifiche"
+//        			)
+//        		)
+//        	),
+//        	@ApiResponse(
+//            	responseCode = "404",
+//            	description = "Sala o spettacolo non trovati",
+//            	content = @Content(
+//            		mediaType = MediaType.APPLICATION_JSON_VALUE,
+//            		schema = @Schema(
+//            			implementation = ResponseErroreDTO.class,
+//            			description = SwaggerTags.ERROR_TAG
+//            		)
+//            	)
+//            ),
+//        	@ApiResponse(
+//        		responseCode = "409",
+//                description = "Nome sala già esistente",
+//                content = @Content(
+//                	mediaType = MediaType.APPLICATION_JSON_VALUE,
+//                	schema = @Schema(
+//                		implementation = ResponseErroreDTO.class,
+//                		description = SwaggerTags.ERROR_TAG
+//                	)
+//                )
+//            )
+//        }
+//    )
+//	@BadRequestApiResponse
+//	@PatchMapping("/staff/sala/{id}")
+//	public ResponseEntity<ResponseSalaDTO> editById(
+//			@PathVariable @Parameter(
+//					name = "ID",
+//					description = "ID della sala da modificare",
+//					required = true,
+//					allowEmptyValue = false) Long id,
+//			@RequestBody EditSalaDTO dto){
+//		return ResponseEntity.ok(salaService.editById(id, dto));
+//	}
 	
 	
 	
-	@Tag(name = SwaggerTags.STAFF_TAG, description = SwaggerTags.STAFF_TAG_DESC)
-    @Operation(
-        summary = "Elimina sala",
-        description = "Lo staff elimina una sala in base al suo ID",
-        responses = {
-        	@ApiResponse(
-        		responseCode = "200",
-        		description = "Sala rimossa"
-        	),
-        	@ApiResponse(
-            	responseCode = "404",
-            	description = "Sala non trovata",
-            	content = @Content(
-            		mediaType = MediaType.APPLICATION_JSON_VALUE,
-            		schema = @Schema(
-            			implementation = ResponseErroreDTO.class,
-            			description = SwaggerTags.ERROR_TAG
-            		)
-            	)
-            )
-        } 
-    )
-	@DeleteMapping("/staff/sala/{id}")
-	public ResponseEntity<Void> removeById(
-			@PathVariable @Parameter(
-					name = "ID", 
-					description = "ID della sala da eliminare", 
-					required = true, 
-					allowEmptyValue = false) Long id){
-		salaService.removeById(id);
-		return ResponseEntity.ok().build();
-	}
+//	@Tag(name = SwaggerTags.STAFF_TAG, description = SwaggerTags.STAFF_TAG_DESC)
+//    @Operation(
+//        summary = "Elimina sala",
+//        description = "Lo staff elimina una sala in base al suo ID",
+//        responses = {
+//        	@ApiResponse(
+//        		responseCode = "200",
+//        		description = "Sala rimossa"
+//        	),
+//        	@ApiResponse(
+//            	responseCode = "404",
+//            	description = "Sala non trovata",
+//            	content = @Content(
+//            		mediaType = MediaType.APPLICATION_JSON_VALUE,
+//            		schema = @Schema(
+//            			implementation = ResponseErroreDTO.class,
+//            			description = SwaggerTags.ERROR_TAG
+//            		)
+//            	)
+//            )
+//        }
+//    )
+//	@DeleteMapping("/staff/sala/{id}")
+//	public ResponseEntity<Void> removeById(
+//			@PathVariable @Parameter(
+//					name = "ID",
+//					description = "ID della sala da eliminare",
+//					required = true,
+//					allowEmptyValue = false) Long id){
+//		salaService.removeById(id);
+//		return ResponseEntity.ok().build();
+//	}
 }

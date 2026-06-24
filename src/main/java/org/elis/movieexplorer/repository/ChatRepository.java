@@ -33,8 +33,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 	@Query("""
 		    SELECT COUNT(DISTINCT c)
 		    FROM Chat c
-		    JOIN c.messaggi m
-		    WHERE m.visualizzato = false AND m.mittente.id = c.utente.id
+		    WHERE c.messaggiSospesoPerStaff IS TRUE
 		""")
 	Integer countNotReadedChatForStaff();
 	
@@ -42,8 +41,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 		    SELECT c
 		    FROM Chat c
 		    JOIN c.messaggi m
-		    WHERE m.visualizzato = false
-		      AND m.mittente.id = c.utente.id
+		    WHERE  c.messaggiSospesoPerStaff IS TRUE
 		    GROUP BY c
 		    ORDER BY MAX(m.createdAt) DESC
 		""")
@@ -52,8 +50,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 	@Query("""
 		    SELECT COUNT(DISTINCT c)
 		    FROM Chat c
-		    JOIN c.messaggi m
-		    WHERE c.utente.id = :id AND m.visualizzato = false AND m.mittente.id <> c.utente.id
+		    WHERE c.utente.id = :id AND  c.messaggiSospesoPerCliente IS TRUE
 		""")
 	Integer countNotReadedChatForUser(@Param("id") Long id);
 	
@@ -62,8 +59,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 		    FROM Chat c
 		    JOIN c.messaggi m
 		    WHERE c.utente.id = :id
-		      AND m.visualizzato = false
-		      AND m.mittente.id <> c.utente.id
+		      AND c.messaggiSospesoPerCliente IS TRUE
 		    GROUP BY c
 		    ORDER BY MAX(m.createdAt) DESC
 		""")
