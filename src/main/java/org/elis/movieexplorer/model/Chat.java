@@ -40,7 +40,7 @@ public class Chat {
 	private LocalDateTime createdAt;
 
 	@NotNull
-	private boolean messaggiSospesoPerStaff = false;
+	private boolean messaggiSospesoPerStaff = true;
 
 	@NotNull
 	private boolean messaggiSospesoPerCliente = false;
