@@ -36,7 +36,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 		    JOIN c.messaggi m
 		    WHERE m.visualizzato = false AND m.mittente.id = c.utente.id
 		""")
-	Long countNotReadedChatForStaff();
+	Integer countNotReadedChatForStaff();
 	
 	@Query("""
 		    SELECT c
@@ -55,7 +55,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 		    JOIN c.messaggi m
 		    WHERE c.utente.id = :id AND m.visualizzato = false AND m.mittente.id <> c.utente.id
 		""")
-	Long countNotReadedChatForUser(@Param("id") Long id);
+	Integer countNotReadedChatForUser(@Param("id") Long id);
 	
 	@Query("""
 		    SELECT c

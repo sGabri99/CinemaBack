@@ -2,15 +2,20 @@ package org.elis.movieexplorer.service.jpa;
 
 import java.util.List;
 import java.util.Optional;
+
+import jakarta.transaction.Transactional;
 import org.elis.movieexplorer.dto.chat.request.CreateChatDTO;
 import org.elis.movieexplorer.dto.chat.request.InsertChatDTO;
 import org.elis.movieexplorer.dto.chat.response.ResponseChatDTO;
-import org.elis.movieexplorer.dto.message.request.InsertMessageDTO;
+import org.elis.movieexplorer.dto.message.request.InsertMessaggioDTO;
 import org.elis.movieexplorer.dto.message.response.ResponseMessageDTO;
+import org.elis.movieexplorer.exception.definition.MENotAuthorizedException;
 import org.elis.movieexplorer.exception.definition.MENotFoundException;
 import org.elis.movieexplorer.model.Chat;
 import org.elis.movieexplorer.model.Messaggio;
 import org.elis.movieexplorer.model.Utente;
+import org.elis.movieexplorer.model.enums.Ruolo;
+import org.elis.movieexplorer.model.enums.StatoChat;
 import org.elis.movieexplorer.repository.ChatRepository;
 import org.elis.movieexplorer.repository.MessaggioRepository;
 import org.elis.movieexplorer.service.definition.ChatService;
@@ -26,25 +31,21 @@ public class ChatServiceJpa implements ChatService {
 	private final MessaggioMapper messageMapper;
 
 	@Override
-	public ResponseChatDTO insertChat(InsertChatDTO dto, Utente utente) {
+	@Transactional
+	public void insertChat(InsertChatDTO dto, Utente utente) {
 		Chat chat = chatMapper.toEntity(dto, utente);
 		chat = chatRepo.save(chat);
-		insertMessage(
-			new InsertMessageDTO(
+		Messaggio message = new Messaggio(
+				null,
 				dto.getMessaggio(),
-				false,
-				chat.getId(),
-				utente.getId()
-			),
-			utente
-		);
-		return chatMapper.toResponse(chat);
+				chat.getCreatedAt(), chat, utente);
+		messageRepo.save(message);
 	}
 
 	@Override
-	public ResponseMessageDTO insertMessage(InsertMessageDTO dto, Utente utente) {
-		Messaggio message = messageRepo.save(messageMapper.toEntity(dto, utente));
-		return messageMapper.toResponse(message);
+	public void insertMessage(InsertMessaggioDTO dto, Utente utente) {
+		Messaggio message = messageMapper.toEntity(dto, utente);
+		messageRepo.save(message);
 	}
 
 	@Override
@@ -61,20 +62,41 @@ public class ChatServiceJpa implements ChatService {
 	}
 
 	@Override
-	public ResponseChatDTO findChatById(Long chatId) {
-		Optional<Chat> chat = chatRepo.findById(chatId)
+	public ResponseChatDTO findChatById(Long chatId, Utente utente) {
+		Chat chat = chatRepo.findById(chatId)
 			.orElseThrow(
-				() -> new MENotFoundException("id non trovato")
+				() -> new MENotFoundException("Chat non trovata.")
 		);
-		return chatMapper.toResponse(chat.get());
+
+		if(utente.getId().equals(chat.getUtente().getId())
+				|| (utente.getRuolo() == Ruolo.STAFF
+				|| utente.getRuolo() == Ruolo.SUPERADMIN)){
+			List<Messaggio> messaggi = messageRepo.findByChat(chatId).orElseThrow(
+					() -> new MENotFoundException("Messaggio non trovato.")
+			);
+            return chatMapper.toResponse(chat, messaggi);
+
+		}else{
+			throw new MENotAuthorizedException("Non hai accesso a questo contenuto.");
+		}
 	}
 
 	@Override
-	public ResponseChatDTO cambiaStatoChat(Long messageId) {
-		Optional<Chat> chat = messageRepo.findById(messageId)
+	public void cambiaStatoChat(Long idChat) {
+		Chat chat = chatRepo.findById(idChat)
 			.orElseThrow(
-				() -> new MENotFoundException("id non trovato")
+				() -> new MENotFoundException("Chat non trovata.")
 		);
-		return messageMapper.toResponse(chat.get());
+		chat.setStato(
+				chat.getStato()==StatoChat.IN_ATTESA?
+						StatoChat.APERTO:StatoChat.CHIUSO
+		);
+	}
+
+	@Override
+	public Integer countNotRead(Utente utente){
+		return utente.getRuolo() == Ruolo.CLIENTE?
+				chatRepo.countNotReadedChatForUser(utente.getId()):
+				chatRepo.countNotReadedChatForStaff();
 	}
 }
