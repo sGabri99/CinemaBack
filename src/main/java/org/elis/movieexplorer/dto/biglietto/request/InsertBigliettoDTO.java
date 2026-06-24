@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,5 +22,5 @@ public class InsertBigliettoDTO {
 	private Long idSpettacolo;
 	
 	@Positive
-	private Integer numeroBiglietti;
+	private List<Integer> idPosti;
 }
