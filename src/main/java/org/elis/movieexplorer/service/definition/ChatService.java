@@ -20,4 +20,6 @@ public interface ChatService {
 	ResponseChatDTO findChatById(Long idChat);
 
 	ResponseChatDTO cambiaStatoChat(Long idChat);
+	
+	Integer countNotRead() 
 }
