@@ -15,12 +15,13 @@ import org.springframework.stereotype.Component;
 public class BigliettoMapper {
 	
 
-	public List<Biglietto> fromInsertWithoutInsert(List<Posto> posti, Spettacolo spettacolo) {
+	public List<Biglietto> fromInsert(List<Posto> posti, Spettacolo spettacolo, Utente utenteLoggato) {
 		List<Biglietto> biglietti = new ArrayList<>(); 
 		for(Posto p : posti) {
 			Biglietto b = new Biglietto();
 			b.setPosto(p);
 			b.setSpettacolo(spettacolo);
+			b.setUtente(utenteLoggato);
 			biglietti.add(b);
 		}
 		return biglietti;	
