@@ -33,7 +33,7 @@ public class Chat {
 	private String oggetto;
 	
 	@NotNull
-	private StatoChat stato;
+	private StatoChat stato = StatoChat.IN_ATTESA;
 	
 	@NotNull
 	@CreationTimestamp
