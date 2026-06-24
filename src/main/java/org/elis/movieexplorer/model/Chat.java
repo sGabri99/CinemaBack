@@ -39,12 +39,16 @@ public class Chat {
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
+	@NotNull
+	private boolean messaggiSospesoPerStaff = false;
+
+	@NotNull
+	private boolean messaggiSospesoPerCliente = false;
+	
 	@OneToMany( mappedBy = "chat" )
 	private List<Messaggio> messaggi;
 	
 	@ManyToOne
 	private Utente utente;
-	
-	
 	
 }
