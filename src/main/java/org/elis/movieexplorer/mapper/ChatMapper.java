@@ -11,8 +11,10 @@ import org.elis.movieexplorer.model.Chat;
 import org.elis.movieexplorer.model.Messaggio;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class ChatMapper {
 	
 	private MessaggioMapper messaggioMapper;

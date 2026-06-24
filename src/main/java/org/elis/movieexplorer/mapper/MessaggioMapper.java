@@ -8,9 +8,11 @@ import org.elis.movieexplorer.model.Utente;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
+@Component
 public class MessaggioMapper {
 	public Messaggio toEntity(InsertMessaggioDTO dto, Chat chat, Utente mittente) {
 		Messaggio m = new Messaggio();
