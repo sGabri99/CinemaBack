@@ -17,7 +17,7 @@ public class PostoMapper {
 		for(Posto p : posti) {
 			ResponsePostoBySalaDTO dto = new ResponsePostoBySalaDTO();
 			dto.setColonna(p.getColonna());
-			dto.setFila((char) (p.getFila()+ 65));
+			dto.setFila(String.valueOf((char) (p.getFila() + 65)));
 			listaDTO.add(dto);
 		}
 		return listaDTO;
