@@ -15,4 +15,10 @@ public interface PostoRepository extends JpaRepository<Posto, Long> {
     public Optional<Posto> findById(Long id);
 
     public Optional<List<Posto>> getPostiBySalaId(Long idSala);
+
+    @Query("SELECT p FROM Posto p WHERE p.sala.id = :idSala")
+    public List<Posto> findBySala(Long idSala);
+
+    @Query("SELECT b.posto.id FROM Biglietto b WHERE b.spettacolo.id = :idSpettacolo")
+    public List<Long> findIdPostiOccupatiBySpettacolo(Long idSpettacolo);
 }
