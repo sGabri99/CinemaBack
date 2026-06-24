@@ -62,14 +62,15 @@ public class ChatController {
 
 
 	@PatchMapping("/staff/cambiostato")
-	public ResponseEntity<ResponseChatDTO> cambioStato(@RequestParam Long idChat) {
-		return ResponseEntity.ok(chatService.cambiaStatoChat(idChat));
+	public ResponseEntity<Void> cambioStato(@RequestParam Long idChat) {
+		chatService.cambiaStatoChat(idChat);
+		return ResponseEntity.ok().build();
 	}
 	//conta quante chat non lette ha un utente
 	@GetMapping("/user/contatore")
 	public ResponseEntity<Integer> contatoreChatNonLette(Authentication authenticator){
 		Utente u=(Utente) authenticator.getPrincipal();
-		return ResponseEntity.ok(chatService.countNotRead(u));
+		return ResponseEntity.ok(chatService.countChatNotRead(u));
 
 	}
 
