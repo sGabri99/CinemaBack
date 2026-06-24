@@ -48,15 +48,13 @@ public class BigliettoServiceJPA implements BigliettoService{
 		Spettacolo spettacolo = oSpettacolo.orElseThrow(() -> new MENotFoundException("nessuno spettacolo trovato"));
 		
 		int postiAttuali = spettacolo.getPostiRimanenti();
-	    int richiesti = dto.getNumeroBiglietti();
+	    List<Integer> richiesti = dto.getIdPosti();
 
 		if(postiAttuali <= 0) throw new MEUnprocessableEntityException("posti esauriti");
-		if(richiesti > postiAttuali) throw new MEUnprocessableEntityException("disponibilità biglietti insufficente");
-
-		repositoryS.save(spettacolo);
+		if(richiesti.size() > postiAttuali) throw new MEUnprocessableEntityException("disponibilità biglietti insufficente");
 		
 		List<Biglietto> bigliettiDaSalvare = new ArrayList<>();
-		for(int i = 0 ; i < richiesti ; i++) {
+		for(int i = 0 ; i < richiesti.size() ; i++) {
 			Biglietto b = mapperB.fromInsertWithoutInsert(utenteLoggato, spettacolo);
 			b.setPrezzo(spettacolo.getSala().getTipo().getPrezzo());
 			String codice = UUID.randomUUID().toString().replace("-", "").substring(0, 12).toUpperCase();

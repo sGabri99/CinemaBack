@@ -25,6 +25,9 @@ public class ResponseBigliettoDTO {
 	@EqualsAndHashCode.Exclude
 	private Long idSpettacolo;
 	
+	@EqualsAndHashCode.Exclude
+	private Long idPosto;
+	
 	private String codiceBiglietto;
 	
 	private BigDecimal prezzo;
