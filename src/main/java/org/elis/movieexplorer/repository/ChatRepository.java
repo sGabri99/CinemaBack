@@ -1,8 +1,6 @@
 package org.elis.movieexplorer.repository;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.elis.movieexplorer.model.Chat;
 import org.elis.movieexplorer.model.enums.StatoChat;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -71,8 +69,5 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 		""")
 	List<Chat> findNotReadedChatForUser(@Param("id") Long id);
 	
-	
-	
-	
-	
+	List<Chat> findAllByUtenteId(Long utenteId);
 }
