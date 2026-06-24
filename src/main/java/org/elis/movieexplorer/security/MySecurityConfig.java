@@ -53,6 +53,8 @@ public class MySecurityConfig {
 			t.requestMatchers("/admin/**").hasRole(Ruolo.SUPERADMIN.getNome());
 			t.requestMatchers("/staff/**").hasAnyRole(Ruolo.STAFF.getNome(), Ruolo.SUPERADMIN.getNome());
 			t.requestMatchers("/cliente/**").hasRole(Ruolo.CLIENTE.getNome());
+			t.requestMatchers("/user/**").hasAnyRole(Ruolo.CLIENTE.getNome(),Ruolo.STAFF.getNome(),Ruolo.SUPERADMIN.getNome());
+
 			t.anyRequest().permitAll();	
 		});
 		return config.build();

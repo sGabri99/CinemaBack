@@ -21,31 +21,28 @@ public class ChatController {
 private ChatService chatService;
 //creazione da parte dell'utente di una chat
 @PostMapping("/cliente/chat")
-public ResponseEntity<String> creachat(@RequestBody @Valid CreateChatDTO dto, Authentication authenticator){
+public ResponseEntity<String> creaChat(@RequestBody @Valid CreateChatDTO dto, Authentication authenticator){
 	
 	
 	
 }
 //invio messaggio sia da parte di cliente sia da parte di staff
-@PostMapping("/inviamessaggio")
+@PostMapping("/user/inviamessaggio")
 public ResponseEntity<String> inviaMessaggio(@RequestBody @Valid InsertMessageDTO dto, Authentication authenticator){
 	
 }
 	
-//recupero da parte del cliente delle proprie chat 	
-@GetMapping("/cliente/chat")
+//recupero di tutte le proprie chat da parte dell'utente o recupero di tutte le chat da parte dello staff
+@GetMapping("/user/chat")
 public ResponseEntity<List<ResponseChatDTO>> listaChat(Authentication authenticator){
 	
 	
 }
-//recupero da parte dello staff di tutte le chat 
 
-@GetMapping("/staff/chat")
-public ResponseEntity<List<ResponseChatDTO>> listaChat(){
+@GetMapping("/user/chat/{id}")
+public ResponseEntity<ResponseChatDTO> singolaChat(@PathVariable Long id, Authentication authenticator){
 	
 }
-
-@GetMapping("")
 
 
 
