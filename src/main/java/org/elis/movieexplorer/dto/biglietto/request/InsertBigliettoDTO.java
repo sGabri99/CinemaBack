@@ -1,7 +1,5 @@
 package org.elis.movieexplorer.dto.biglietto.request;
 
-import java.util.List;
-
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,5 +20,5 @@ public class InsertBigliettoDTO {
 	private Long idSpettacolo;
 	
 	@Positive
-	private List<Integer> idPosti;
+	private Integer numeroBiglietti;
 }
