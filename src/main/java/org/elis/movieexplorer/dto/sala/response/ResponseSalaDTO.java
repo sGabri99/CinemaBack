@@ -25,7 +25,7 @@ public class ResponseSalaDTO {
 	@EqualsAndHashCode.Exclude
 	@NotNull
 	@Range(min = 0)
-	private Short numeroPosti;
+	private Integer numeroPosti;
 	
 	@EqualsAndHashCode.Exclude
 	@NotNull
