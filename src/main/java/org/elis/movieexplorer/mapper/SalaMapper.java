@@ -22,9 +22,7 @@ public class SalaMapper {
 	                .map(Spettacolo::getId)
 	                .toList());
 	    }
-		dto.setIdPosti(s.getPosti().stream()
-					.map(Posto::getId)
-					.toList());
+		dto.setNumeroPosti(s.getPosti().size());
 		return dto;
 	}
 }
