@@ -34,34 +34,49 @@ public class ChatServiceJpa implements ChatService {
 	@Override
 	@Transactional
 	public void insertChat(InsertChatDTO dto, Utente utente) {
-//		Chat chat = chatMapper.toEntity(dto, utente);
-//		chat = chatRepo.save(chat);
-//		Messaggio message = new Messaggio(
-//				null,
-//				dto.getMessaggio(),
-//				chat.getCreatedAt(), chat, utente);
-//		messageRepo.save(message);
+		Chat chat = chatMapper.toEntity(dto);
+		chat.setUtente(utente);
+		chat = chatRepo.save(chat);
+		Messaggio message = new Messaggio(
+				null,
+				dto.getMessaggio(),
+				chat.getCreatedAt(), chat, utente);
+		messageRepo.save(message);
 	}
 
 	@Override
 	public void insertMessage(InsertMessaggioDTO dto, Utente utente) {
-//		Messaggio message = messageMapper.toEntity(dto, utente);
-//		messageRepo.save(message);
+		Chat chat = chatRepo.findById(dto.getIdChat())
+				.orElseThrow(
+					() -> new MENotFoundException("Chat non trovata.")
+			);
+		Messaggio message = messageMapper.toEntity(dto, chat, utente);
+		messageRepo.save(message);
 	}
 
 	@Override
 	public List<ResponseInfoChatDTO> findAllChats(Utente utente) {
-//		if(utente.getRuolo().toString() == "Cliente") {
-//			return chatRepo.findAllByUtenteId(utente.getId())
-//						   .stream()
-//						   .map(c -> chatMapper.toResponse(c))
-//						   .toList();
-//		}
-//		return chatRepo.findAll().stream()
-//								 .map(c -> chatMapper.toResponse(c))
-//								 .toList();
-        return null;
-    }
+		List<Chat> chats;
+		if(utente.getRuolo() == Ruolo.CLIENTE) {
+			chats = chatRepo.findForUser(utente.getId());
+		} else {
+			chats = chatRepo.findForStaff();
+		}
+		
+		return chats
+				.stream()
+				.map(c -> {
+					Messaggio ultimoMessaggio = messageRepo.findChatLastMessage(c.getId()).orElseThrow(() -> new MENotFoundException("messaggio non trovato"));
+					boolean messaggiInSospeso;
+					if(utente.getRuolo() == Ruolo.CLIENTE) {
+						messaggiInSospeso = c.isMessaggiSospesoPerCliente();
+					} else {
+						messaggiInSospeso = c.isMessaggiSospesoPerStaff();
+					}
+					return chatMapper.toResponse(c, messaggiInSospeso, ultimoMessaggio);
+				})
+				.toList();
+	}
 
 	@Override
 	public ResponseChatDTO findChatById(Long chatId, Utente utente) {

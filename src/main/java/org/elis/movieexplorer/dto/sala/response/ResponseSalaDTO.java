@@ -1,6 +1,6 @@
 package org.elis.movieexplorer.dto.sala.response;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank; 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.elis.movieexplorer.model.enums.Tipo;
