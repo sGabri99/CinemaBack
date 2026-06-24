@@ -2,6 +2,7 @@ package org.elis.movieexplorer.model;
 
 import java.time.LocalDateTime;
 
+import org.elis.movieexplorer.model.enums.Ruolo;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PostPersist;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder.Default;
@@ -31,9 +33,6 @@ public class Messaggio {
 	
 	@NotNull
 	private String messaggio;
-
-	@NotNull
-	private boolean visualizzato = false;
 	
 	@CreationTimestamp
 	@NotNull
@@ -45,6 +44,15 @@ public class Messaggio {
 	
 	@ManyToOne
 	private Utente mittente;
-
+	
+	@PostPersist
+    public void afterPersist() {
+        if( this.mittente.getRuolo() == Ruolo.CLIENTE ){
+        	chat.setMessaggiSospesoPerStaff(true);
+        }
+        else {
+        	chat.setMessaggiSospesoPerCliente(true);
+        }
+    }
 	
 }

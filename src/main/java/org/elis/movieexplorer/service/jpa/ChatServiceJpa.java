@@ -3,11 +3,13 @@ package org.elis.movieexplorer.service.jpa;
 import java.util.List;
 import java.util.Optional;
 import org.elis.movieexplorer.dto.chat.request.CreateChatDTO;
+import org.elis.movieexplorer.dto.chat.request.InsertChatDTO;
 import org.elis.movieexplorer.dto.chat.response.ResponseChatDTO;
 import org.elis.movieexplorer.dto.message.request.InsertMessageDTO;
 import org.elis.movieexplorer.dto.message.response.ResponseMessageDTO;
 import org.elis.movieexplorer.exception.definition.MENotFoundException;
 import org.elis.movieexplorer.model.Chat;
+import org.elis.movieexplorer.model.Messaggio;
 import org.elis.movieexplorer.model.Utente;
 import org.elis.movieexplorer.repository.ChatRepository;
 import org.elis.movieexplorer.repository.MessaggioRepository;
@@ -24,27 +26,38 @@ public class ChatServiceJpa implements ChatService {
 	private final MessaggioMapper messageMapper;
 
 	@Override
-	public ResponseChatDTO insertChat(CreateChatDTO dto, Utente utente) {
-		return chatMapper.toResponse(chatRepo.save(chatMapper.toEntity(dto, utente)));
+	public ResponseChatDTO insertChat(InsertChatDTO dto, Utente utente) {
+		Chat chat = chatMapper.toEntity(dto, utente);
+		chat = chatRepo.save(chat);
+		insertMessage(
+			new InsertMessageDTO(
+				dto.getMessaggio(),
+				false,
+				chat.getId(),
+				utente.getId()
+			),
+			utente
+		);
+		return chatMapper.toResponse(chat);
 	}
 
 	@Override
 	public ResponseMessageDTO insertMessage(InsertMessageDTO dto, Utente utente) {
-		return messageMapper.toResponse(messageRepo.save(messageMapper.toEntity(dto, utente)));
+		Messaggio message = messageRepo.save(messageMapper.toEntity(dto, utente));
+		return messageMapper.toResponse(message);
 	}
 
 	@Override
-	public List<ResponseChatDTO> findAllChats() {
+	public List<ResponseChatDTO> findAllChats(Utente utente) {
+		if(utente.getRuolo().toString() == "Cliente") {
+			return chatRepo.findAllByUtenteId(utente.getId())
+						   .stream()
+						   .map(c -> chatMapper.toResponse(c))
+						   .toList();
+		}
 		return chatRepo.findAll().stream()
 								 .map(c -> chatMapper.toResponse(c))
 								 .toList();
-	}
-
-	@Override
-	public List<ResponseChatDTO> findAllChatsByUtente(Long utenteId) {
-		return chatRepo.findAllByUtenteId(utenteId).stream()
-												   .map(c -> chatMapper.toResponse(c))
-												   .toList();
 	}
 
 	@Override

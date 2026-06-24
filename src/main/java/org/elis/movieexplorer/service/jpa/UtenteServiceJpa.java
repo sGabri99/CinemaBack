@@ -115,7 +115,7 @@ public class UtenteServiceJpa implements UtenteService {
     public ResponseUtenteDTO removeById(Long id) {
         Optional<Utente> optional = utenteRepository.findById(id);
         Utente u = optional.orElseThrow(() -> new MENotFoundException("Utente non trovato."));
-        u.getBiglietti().forEach(b -> bigliettoService.removeBiglietto(b));
+        u.getBiglietti().forEach(b -> bigliettoService.removeByIdEmail(b.getId(), u.getEmail()));
         utenteRepository.delete(u);
         return new ResponseUtenteDTO("Utente eliminato con successo.");
     }
