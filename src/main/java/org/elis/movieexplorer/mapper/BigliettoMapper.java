@@ -8,12 +8,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BigliettoMapper {
+	
+	// ???
 	public Biglietto fromInsertWithoutInsert(Utente utente, Spettacolo spettacolo) {
 		Biglietto b = new Biglietto();
 		b.setUtente(utente);
 		b.setSpettacolo(spettacolo);
 		return b;	
 	}
+	
 	
 	public ResponseBigliettoDTO toResponse(Biglietto biglietto) {
 		ResponseBigliettoDTO bigliettoDTO = new ResponseBigliettoDTO();
@@ -22,6 +25,7 @@ public class BigliettoMapper {
 		bigliettoDTO.setIdSpettacolo(biglietto.getSpettacolo().getId());
 		bigliettoDTO.setCodiceBiglietto(biglietto.getCodiceBiglietto());
 		bigliettoDTO.setPrezzo(biglietto.getPrezzo());
+		bigliettoDTO.setIdPosto(biglietto.getPosto().getId());
 		return bigliettoDTO;
 	} 
 }
