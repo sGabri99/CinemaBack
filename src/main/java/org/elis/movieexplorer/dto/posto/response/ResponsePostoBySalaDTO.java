@@ -21,6 +21,5 @@ public class ResponsePostoBySalaDTO {
     private Integer colonna;
 
     @NotNull
-    @Pattern(regexp = "^[A-Z]$")
-    private char fila;
+    private String fila;
 }

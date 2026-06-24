@@ -8,7 +8,5 @@ public class ResponseMessaggioDTO {
 	
 	private LocalDateTime createdAt;
 	
-	private Boolean visualizzato;
-	
-	private Long idMittente;
+	private boolean isCliente;
 }
