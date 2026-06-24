@@ -36,7 +36,7 @@ public class Spettacolo {
 	@Column(nullable = false)
 	@NotNull
 	@Range(min = 0)
-	private Short postiRimanenti;
+	private Integer postiRimanenti;
 	
 	@OneToMany(mappedBy = "spettacolo")
 	private List<Biglietto> biglietti;

@@ -15,7 +15,7 @@ public class EditSpettacoloDTO {
 	private LocalDate data;
 	private LocalDateTime oraInizio;
 	private LocalDateTime oraFine;
-	private Short postiRimanenti;
+	private Integer postiRimanenti;
 	private List<Long> idBiglietti;
 	private Long idSala;
 	private Long idFilm;

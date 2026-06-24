@@ -79,21 +79,6 @@ public class SalaServiceJPA implements SalaService {
 		}
 		if(sMod.getTipo() != null) 
 			s.setTipo(sMod.getTipo());
-		if(sMod.getNumeroPosti() != null)
-			s.setNumeroPosti(sMod.getNumeroPosti());
-		
-		if(sMod.getIdSpettacoli() != null) {
-			List<Spettacolo> spettacoliMod = new ArrayList<>();
-			for(Long i : sMod.getIdSpettacoli()) {
-				Optional<Spettacolo> spetOpt = repositoryS.findById(i);
-				Spettacolo spet = spetOpt.orElseThrow(() -> new MENotFoundException("spettacolo non trovato per id: " + i));
-				spettacoliMod.add(spet);
-			}
-			
-			if(spettacoliMod != s.getSpettacoli()) {
-				s.setSpettacoli(spettacoliMod);
-			}
-		}
 		
 		repository.save(s);
 		return mapper.toResponse(s);

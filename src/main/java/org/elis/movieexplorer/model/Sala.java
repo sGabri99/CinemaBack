@@ -26,14 +26,15 @@ public class Sala {
 	private String nome;
 	
 	@Column(nullable = false)
-	@Positive
-	@NotNull
-	private Short numeroPosti;
-	
-	@Column(nullable = false)
 	@NotNull
 	private Tipo tipo;
 	
 	@OneToMany(mappedBy = "sala")
 	private List<Spettacolo> spettacoli;
+
+	@OneToMany(mappedBy = "sala")
+	@Column(nullable= false)
+	@NotNull
+	private List<Posto> posti;
+
 }

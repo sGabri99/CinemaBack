@@ -52,8 +52,7 @@ public class BigliettoServiceJPA implements BigliettoService{
 
 		if(postiAttuali <= 0) throw new MEUnprocessableEntityException("posti esauriti");
 		if(richiesti > postiAttuali) throw new MEUnprocessableEntityException("disponibilità biglietti insufficente");
-		
-		spettacolo.setPostiRimanenti((short) (postiAttuali-richiesti));
+
 		repositoryS.save(spettacolo);
 		
 		List<Biglietto> bigliettiDaSalvare = new ArrayList<>();
@@ -96,6 +95,7 @@ public class BigliettoServiceJPA implements BigliettoService{
 	}
 
 	@Override
+	@Transactional
 	public void removeByIdEmail(Long idBiglietto, String email) {
 		Biglietto biglietto = repositoryB.findById(idBiglietto).orElseThrow(() -> new MENotFoundException("biglietto non trovato"));
 		Utente utente = repositoryU.findUtenteByEmail(email).orElseThrow(() -> new MENotFoundException("utente non trovato"));
@@ -105,15 +105,9 @@ public class BigliettoServiceJPA implements BigliettoService{
 		if(LocalDateTime.now().isAfter(oraLimiteCancellazione))
 			throw new MEPastTicketDeletionException("non è più possibile cancellare il biglietto a meno di un'ora dall'inizio dello spettacolo");
 		Spettacolo spettacolo = biglietto.getSpettacolo();
-		spettacolo.setPostiRimanenti((short) (spettacolo.getPostiRimanenti() + 1));
 		    
 		repositoryS.save(spettacolo);
 		repositoryB.deleteById(idBiglietto);
 	}
 
-	@Override
-	public void removeBiglietto(Biglietto b){
-		Spettacolo s = b.getSpettacolo();
-		s.setPostiRimanenti((short)(s.getPostiRimanenti()+1));
-	}
 }
