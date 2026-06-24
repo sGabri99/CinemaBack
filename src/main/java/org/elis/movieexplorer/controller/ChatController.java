@@ -52,7 +52,7 @@ public class ChatController {
 		return ResponseEntity.ok().build();
 
 	}
-	
+
 	@Tag(name = SwaggerTags.LOGGATO_TAG, description = SwaggerTags.LOGGATO_TAG_DESC)
 	@Operation(
 			summary = "Invio di un messaggio",
@@ -64,7 +64,7 @@ public class ChatController {
 							)
 			}
 			)
-	
+
 
 	@PostMapping("/user/inviamessaggio")
 	public ResponseEntity<Void> inviaMessaggio(@RequestBody @Valid InsertMessaggioDTO dto, Authentication authenticator) {
@@ -73,9 +73,9 @@ public class ChatController {
 		return ResponseEntity.ok().build();
 	}
 
-	
-	
-	
+
+
+
 	@Tag(name = SwaggerTags.LOGGATO_TAG, description = SwaggerTags.LOGGATO_TAG_DESC)
 	@Operation(
 			summary = "Recupero di tutte le chat",
@@ -84,21 +84,21 @@ public class ChatController {
 					@ApiResponse(
 							responseCode = "200",
 							description = "Chat recuperate",
-									content = @Content(
-							        	    mediaType = MediaType.APPLICATION_JSON_VALUE,
-							        	    schema = @Schema(
-							        	        implementation = ResponseInfoChatDTO.class,
-							        	        description = "chat dell'utente"
-							        	    )
-							
+							content = @Content(
+									mediaType = MediaType.APPLICATION_JSON_VALUE,
+									schema = @Schema(
+											implementation = ResponseInfoChatDTO.class,
+											description = "chat dell'utente"
+											)
+
+									)
 							)
-						)
 			}
 			)
-	
-	
-	
-	
+
+
+
+
 	@GetMapping("/user/chats")
 	public ResponseEntity<List<ResponseInfoChatDTO>> listaChat(Authentication authenticator) {
 		Utente u=(Utente) authenticator.getPrincipal();
@@ -114,47 +114,47 @@ public class ChatController {
 					@ApiResponse(
 							responseCode = "200",
 							description = "Chat recuperate",
-									content = @Content(
-							        	    mediaType = MediaType.APPLICATION_JSON_VALUE,
-							        	    schema = @Schema(
-							        	        implementation = ResponseInfoChatDTO.class,
-							        	        description = "chat dell'utente"
-							        	    )
-							
-							)
-						),
-				    @ApiResponse(
-				        	responseCode = "404",
-				        	description = "Chat non trovata/messaggio non trovato",
-				        	content = @Content(
-				        	    mediaType = MediaType.APPLICATION_JSON_VALUE,
-				        	    schema = @Schema(
-				        	        implementation = ResponseErroreDTO.class,
-				        	        description = SwaggerTags.ERROR_TAG
-				       	        )
-				            )
-				        ),
-				    @ApiResponse(
-				        	responseCode = "401",
-				        	description = "Non hai accesso a questo contenuto",
-				        	content = @Content(
-				        	    mediaType = MediaType.APPLICATION_JSON_VALUE,
-				        	    schema = @Schema(
-				        	        implementation = ResponseErroreDTO.class,
-				        	        description = SwaggerTags.ERROR_TAG
-				       	        )
-				            )
-				        ),
-						
-					
+							content = @Content(
+									mediaType = MediaType.APPLICATION_JSON_VALUE,
+									schema = @Schema(
+											implementation = ResponseInfoChatDTO.class,
+											description = "chat dell'utente"
+											)
+
+									)
+							),
+					@ApiResponse(
+							responseCode = "404",
+							description = "Chat non trovata/messaggio non trovato",
+							content = @Content(
+									mediaType = MediaType.APPLICATION_JSON_VALUE,
+									schema = @Schema(
+											implementation = ResponseErroreDTO.class,
+											description = SwaggerTags.ERROR_TAG
+											)
+									)
+							),
+					@ApiResponse(
+							responseCode = "401",
+							description = "Non hai accesso a questo contenuto",
+							content = @Content(
+									mediaType = MediaType.APPLICATION_JSON_VALUE,
+									schema = @Schema(
+											implementation = ResponseErroreDTO.class,
+											description = SwaggerTags.ERROR_TAG
+											)
+									)
+							),
+
+
 			}
 			)
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	//singola chat
 	@GetMapping("/user/chat")
 	public ResponseEntity<ResponseChatDTO> singolaChat(@RequestParam Long id, Authentication authenticator) {
@@ -162,7 +162,7 @@ public class ChatController {
 
 		return ResponseEntity.ok(chatService.findChatById(id, u));
 	}
-	
+
 	@Tag(name = SwaggerTags.STAFF_TAG, description = SwaggerTags.STAFF_TAG_DESC)
 	@Operation(
 			summary = "Aggiorna lo stato di una chat",
@@ -171,26 +171,26 @@ public class ChatController {
 					@ApiResponse(
 							responseCode = "200",
 							description = "Chat recuperate",
-									content = @Content(
-							        	    mediaType = MediaType.APPLICATION_JSON_VALUE,
-							        	    schema = @Schema(
-							        	        implementation = ResponseInfoChatDTO.class,
-							        	        description = "chat dell'utente"
-							        	    )
-							
-							)
-						),
-				    @ApiResponse(
-				        	responseCode = "404",
-				        	description = "Chat non trovata",
-				        	content = @Content(
-				        	    mediaType = MediaType.APPLICATION_JSON_VALUE,
-				        	    schema = @Schema(
-				        	        implementation = ResponseErroreDTO.class,
-				        	        description = SwaggerTags.ERROR_TAG
-				       	        )
-				            )
-				        ),
+							content = @Content(
+									mediaType = MediaType.APPLICATION_JSON_VALUE,
+									schema = @Schema(
+											implementation = ResponseInfoChatDTO.class,
+											description = "chat dell'utente"
+											)
+
+									)
+							),
+					@ApiResponse(
+							responseCode = "404",
+							description = "Chat non trovata",
+							content = @Content(
+									mediaType = MediaType.APPLICATION_JSON_VALUE,
+									schema = @Schema(
+											implementation = ResponseErroreDTO.class,
+											description = SwaggerTags.ERROR_TAG
+											)
+									)
+							),
 			}
 			)
 
@@ -199,8 +199,8 @@ public class ChatController {
 		chatService.cambiaStatoChat(idChat);
 		return ResponseEntity.ok().build();
 	}
-	
-	
+
+
 	@Tag(name = SwaggerTags.LOGGATO_TAG, description = SwaggerTags.LOGGATO_TAG_DESC)
 	@Operation(
 			summary = "Conteggio delle chat non lette",
@@ -209,13 +209,13 @@ public class ChatController {
 					@ApiResponse(
 							responseCode = "200",
 							description = "conteggio effettuato"
-									
-							
+
+
 							)
-						
+
 			}
 			)
-	
+
 	@GetMapping("/user/contatore")
 	public ResponseEntity<Integer> contatoreChatNonLette(Authentication authenticator){
 		Utente u=(Utente) authenticator.getPrincipal();
