@@ -1,11 +1,14 @@
 package org.elis.movieexplorer.service.jpa;
 
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.transaction.Transactional;
+import org.elis.movieexplorer.dto.chat.request.CreateChatDTO;
 import org.elis.movieexplorer.dto.chat.request.InsertChatDTO;
 import org.elis.movieexplorer.dto.chat.response.ResponseChatDTO;
 import org.elis.movieexplorer.dto.message.request.InsertMessaggioDTO;
+import org.elis.movieexplorer.dto.message.response.ResponseMessageDTO;
 import org.elis.movieexplorer.exception.definition.MENotAuthorizedException;
 import org.elis.movieexplorer.exception.definition.MENotFoundException;
 import org.elis.movieexplorer.mapper.ChatMapper;
@@ -32,8 +35,7 @@ public class ChatServiceJpa implements ChatService {
 	@Override
 	@Transactional
 	public void insertChat(InsertChatDTO dto, Utente utente) {
-		Chat chat = chatMapper.toEntity(dto);
-		chat.setUtente(utente);
+		Chat chat = chatMapper.toEntity(dto, utente);
 		chat = chatRepo.save(chat);
 		Messaggio message = new Messaggio(
 				null,
@@ -44,11 +46,7 @@ public class ChatServiceJpa implements ChatService {
 
 	@Override
 	public void insertMessage(InsertMessaggioDTO dto, Utente utente) {
-		Chat chat = chatRepo.findById(dto.getIdChat()).orElseThrow(
-				() -> new MENotFoundException("Chat non trovata")
-		);
-
-		Messaggio message = messageMapper.toEntity(dto, chat, utente);
+		Messaggio message = messageMapper.toEntity(dto, utente);
 		messageRepo.save(message);
 	}
 
