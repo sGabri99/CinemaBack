@@ -12,7 +12,9 @@ import org.elis.movieexplorer.mapper.BigliettoMapper;
 import org.elis.movieexplorer.model.Biglietto;
 import org.elis.movieexplorer.model.Spettacolo;
 import org.elis.movieexplorer.model.Utente;
+import org.elis.movieexplorer.model.Posto;
 import org.elis.movieexplorer.repository.BigliettoRepository;
+import org.elis.movieexplorer.repository.PostoRepository;
 import org.elis.movieexplorer.repository.SpettacoloRepository;
 import org.elis.movieexplorer.repository.UtenteRepository;
 import org.elis.movieexplorer.service.definition.BigliettoService;
@@ -37,6 +39,7 @@ public class BigliettoServiceJPA implements BigliettoService{
 	private final BigliettoRepository repositoryB;
 	private final UtenteRepository repositoryU;
 	private final SpettacoloRepository repositoryS;
+	private final PostoRepository repositoryP;
 	private final BigliettoMapper mapperB;
 	
 	@Override
@@ -53,19 +56,18 @@ public class BigliettoServiceJPA implements BigliettoService{
 		if(postiAttuali <= 0) throw new MEUnprocessableEntityException("posti esauriti");
 		if(richiesti.size() > postiAttuali) throw new MEUnprocessableEntityException("disponibilità biglietti insufficente");
 		
-		List<Biglietto> bigliettiDaSalvare = new ArrayList<>();
-		for(int i = 0 ; i < richiesti.size() ; i++) {
-			Biglietto b = mapperB.fromInsertWithoutInsert(utenteLoggato, spettacolo);
+		List<Posto> posti = richiesti.stream()
+				.map(i -> repositoryP.findById((long) i).orElseThrow(() -> new MENotFoundException("Posto non trovato per id: "+i)))
+				.collect(Collectors.toList());
+		
+		List<Biglietto> bList = mapperB.fromInsert(posti, spettacolo, utenteLoggato);
+		for(Biglietto b : bList) {
 			b.setPrezzo(spettacolo.getSala().getTipo().getPrezzo());
 			String codice = UUID.randomUUID().toString().replace("-", "").substring(0, 12).toUpperCase();
 			b.setCodiceBiglietto(codice);
-			
-			
-			bigliettiDaSalvare.add(b);
-			
 		}
-		
-		List<Biglietto> salvati = repositoryB.saveAll(bigliettiDaSalvare);
+			
+		List<Biglietto> salvati = repositoryB.saveAll(bList);
 		
 		List<ResponseBigliettoDTO> risultato = new ArrayList<>();
 		for (Biglietto b : salvati) {
