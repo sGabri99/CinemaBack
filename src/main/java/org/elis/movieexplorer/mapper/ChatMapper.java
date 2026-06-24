@@ -28,7 +28,7 @@ public class ChatMapper {
 	// FATTo
 	public ResponseChatDTO toResponse(Chat chat, List<Messaggio> messaggi) {
 		ResponseChatDTO dto = new ResponseChatDTO();
-		dto.setChat(toResponse(chat, null, null));
+		dto.setChat(toResponse(chat, false, null));
 		List<ResponseMessaggioDTO> messaggiDTO = new ArrayList<>();
 		
 		for(Messaggio m : messaggi) {
