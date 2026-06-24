@@ -25,7 +25,7 @@ public class PostoServiceJPA {
 	private final PostoRepository repository;
 	private final PostoMapper mapper;
 	
-	public List<ResponsePostoBySpettacoloDTO> findBySala(Long id)
+	public List<ResponsePostoBySalaDTO> findBySala(Long id)
 	{
 		Optional<List<Posto>> posti = repository.getPostiBySalaId(id);
 		return mapper.toResponse(posti);
