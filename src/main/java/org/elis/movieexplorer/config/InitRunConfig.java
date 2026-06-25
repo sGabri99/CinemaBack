@@ -46,7 +46,7 @@ public class InitRunConfig implements CommandLineRunner {
 		            "Admin",
 		            "System",
 		            "admin@gmail.com",
-		            passwordEncoder.encode("admin123"),
+		            passwordEncoder.encode("Admin123!"),
 		            null,
 		            null,
 		            null
@@ -62,7 +62,7 @@ public class InitRunConfig implements CommandLineRunner {
 		            "Mario",
 		            "Rossi",
 		            "staff@gmail.com",
-		            passwordEncoder.encode("staff123"),
+		            passwordEncoder.encode("Staff123!"),
 		            null,
 		            null,
 		            null
@@ -78,7 +78,7 @@ public class InitRunConfig implements CommandLineRunner {
 		            "Giulia",
 		            "Bianchi",
 		            "user@gmail.com",
-		            passwordEncoder.encode("user123"),
+		            passwordEncoder.encode("User123!"),
 		            null,
 		            null,
 		            null
