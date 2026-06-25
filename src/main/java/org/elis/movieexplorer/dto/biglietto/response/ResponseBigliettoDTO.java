@@ -23,7 +23,7 @@ public class ResponseBigliettoDTO {
 	
 	private Long idSpettacolo;
 	
-	private Integer fila;
+	private String fila;
 
 	private Integer colonna;
 	
