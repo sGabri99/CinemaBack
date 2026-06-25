@@ -77,6 +77,7 @@ public class SpettacoloMapper {
 			        .collect(Collectors.toList())
 			);
 		dto.setNomeSala(s.getSala().getNome());
+		dto.setTipoSala(s.getSala().getTipo().name().toUpperCase());
 		dto.setNomeFilm(s.getFilm().getTitolo());
 		dto.setIdFilm(s.getFilm().getId());
 		return dto;

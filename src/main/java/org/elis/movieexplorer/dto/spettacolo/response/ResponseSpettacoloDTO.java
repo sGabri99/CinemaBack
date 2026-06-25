@@ -25,19 +25,14 @@ public class ResponseSpettacoloDTO {
 	private LocalDateTime oraFine;
 	
 	private Integer postiRimanenti;
-	
-	@EqualsAndHashCode.Exclude
+
 	private List<Long> idBiglietti;
-	
-	@EqualsAndHashCode.Exclude
-	@NotNull
+
 	private String nomeSala;
 	
-	@EqualsAndHashCode.Exclude
-	@NotNull
+	private String tipoSala;
+
 	private String nomeFilm;
 	
-	@EqualsAndHashCode.Exclude
-	@NotNull
 	private Long idFilm;
 }
