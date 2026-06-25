@@ -16,13 +16,12 @@ public class Token {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     private String token;
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime scadenza;
 
-    @NotNull
     @OneToOne
     private Utente utente;
 

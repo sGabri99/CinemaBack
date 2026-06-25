@@ -23,11 +23,9 @@ public class Sala {
 	private Long id;
 	
 	@Column(nullable = false, unique = true)
-	@NotBlank
 	private String nome;
 	
 	@Column(nullable = false)
-	@NotNull
 	private Tipo tipo;
 	
 	@OneToMany(mappedBy = "sala")

@@ -32,7 +32,6 @@ public class Biglietto {
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
-	@NotNull
 	private Utente utente;
 	
 	@Column(nullable = false, unique = true)
@@ -43,12 +42,10 @@ public class Biglietto {
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
-	@NotNull
 	private Spettacolo spettacolo;
 
 	@OneToOne
 	@JoinColumn(nullable = false)
-	@NotNull
 	private Posto posto;
 
 	@PostRemove

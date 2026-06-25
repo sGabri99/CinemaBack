@@ -3,15 +3,10 @@ package org.elis.movieexplorer.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.*;
 import org.elis.movieexplorer.model.enums.StatoChat;
 import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,21 +23,21 @@ public class Chat {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Long id;
-	
-	@NotNull
+
+	@Column(nullable = false)
 	private String oggetto;
-	
-	@NotNull
+
+	@Column(nullable = false)
 	private StatoChat stato = StatoChat.IN_ATTESA;
-	
-	@NotNull
+
+	@Column(nullable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
-	@NotNull
+	@Column(nullable = false)
 	private boolean messaggiSospesoPerStaff = true;
 
-	@NotNull
+	@Column(nullable = false)
 	private boolean messaggiSospesoPerCliente = false;
 	
 	@OneToMany( mappedBy = "chat" )

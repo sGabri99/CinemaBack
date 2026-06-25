@@ -30,15 +30,14 @@ public class Messaggio {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY ) 
 	private Long id;
-	
-	@NotNull
+
+	@Column(nullable = false)
 	private String messaggio;
 	
 	@CreationTimestamp
-	@NotNull
+	@Column(nullable = false)
 	private LocalDateTime createdAt;
-	
-	@NotNull
+
 	@ManyToOne
 	private Chat chat;
 	
