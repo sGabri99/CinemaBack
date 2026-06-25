@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChatMapper {
 	
-	private MessaggioMapper messaggioMapper;
+	private final MessaggioMapper messaggioMapper;
 	
 	public Chat toEntity(InsertChatDTO dto) {
 		Chat chat = new Chat();		

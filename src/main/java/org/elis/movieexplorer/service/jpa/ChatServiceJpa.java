@@ -1,8 +1,6 @@
 package org.elis.movieexplorer.service.jpa;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.elis.movieexplorer.dto.chat.request.InsertChatDTO;
 import org.elis.movieexplorer.dto.chat.response.ResponseChatDTO;
 import org.elis.movieexplorer.dto.chat.response.ResponseInfoChatDTO;
@@ -61,15 +59,15 @@ public class ChatServiceJpa implements ChatService {
 	public List<ResponseInfoChatDTO> findAllChats(Utente utente) {
 		List<Chat> chats;
 		if(utente.getRuolo() == Ruolo.CLIENTE) {
-			chats = chatRepo.findForUser(utente.getId());
+			chats = chatRepo.findAllByUtenteIdOrderByCreatedAtDesc(utente.getId());
 		} else {
-			chats = chatRepo.findForStaff();
+			chats = chatRepo.findAllByOrderByCreatedAtDesc();
 		}
 		
 		return chats
 				.stream()
 				.map(c -> {
-					Messaggio ultimoMessaggio = messageRepo.findChatLastMessage(c.getId()).orElseThrow(() -> new MENotFoundException("messaggio non trovato"));
+					Messaggio ultimoMessaggio = messageRepo.findTopByChatIdOrderByCreatedAtDesc(c.getId()).orElseThrow(() -> new MENotFoundException("messaggio non trovato"));
 					boolean messaggiInSospeso;
 					if(utente.getRuolo() == Ruolo.CLIENTE) {
 						messaggiInSospeso = c.isMessaggiSospesoPerCliente();
@@ -105,9 +103,7 @@ public class ChatServiceJpa implements ChatService {
 				}
 			}
 
-			List<Messaggio> messaggi = messageRepo.findByChat(chatId).orElseThrow(
-					() -> new MENotFoundException("Messaggio non trovato.")
-			);
+			List<Messaggio> messaggi = messageRepo.findByChatIdOrderByCreatedAtDesc(chatId);
 
             return chatMapper.toResponse(chat, messaggi);
 

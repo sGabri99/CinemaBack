@@ -8,6 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ChatRepository extends JpaRepository<Chat, Long> {
+	List<Chat> findAllByOrderByCreatedAtDesc();
+
+	List<Chat> findAllByUtenteIdOrderByCreatedAtDesc(Long utenteId);
+
 	@Query("""
 		    SELECT c
 		    FROM Chat c
