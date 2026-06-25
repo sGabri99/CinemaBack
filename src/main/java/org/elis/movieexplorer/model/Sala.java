@@ -17,6 +17,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Sala {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

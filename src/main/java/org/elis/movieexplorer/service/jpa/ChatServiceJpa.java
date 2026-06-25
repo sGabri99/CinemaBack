@@ -3,7 +3,6 @@ package org.elis.movieexplorer.service.jpa;
 import java.util.List;
 import java.util.Optional;
 
-import jakarta.transaction.Transactional;
 import org.elis.movieexplorer.dto.chat.request.InsertChatDTO;
 import org.elis.movieexplorer.dto.chat.response.ResponseChatDTO;
 import org.elis.movieexplorer.dto.chat.response.ResponseInfoChatDTO;
@@ -22,6 +21,7 @@ import org.elis.movieexplorer.repository.MessaggioRepository;
 import org.elis.movieexplorer.service.definition.ChatService;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,11 +40,14 @@ public class ChatServiceJpa implements ChatService {
 		Messaggio message = new Messaggio(
 				null,
 				dto.getMessaggio(),
-				chat.getCreatedAt(), chat, utente);
+				chat.getCreatedAt(),
+				chat,
+				utente);
 		messageRepo.save(message);
 	}
 
 	@Override
+	@Transactional
 	public void insertMessage(InsertMessaggioDTO dto, Utente utente) {
 		Chat chat = chatRepo.findById(dto.getIdChat())
 				.orElseThrow(
@@ -79,6 +82,7 @@ public class ChatServiceJpa implements ChatService {
 	}
 
 	@Override
+	@Transactional
 	public ResponseChatDTO findChatById(Long chatId, Utente utente) {
 		Chat chat = chatRepo.findById(chatId)
 			.orElseThrow(
@@ -88,9 +92,23 @@ public class ChatServiceJpa implements ChatService {
 		if(utente.getId().equals(chat.getUtente().getId())
 				|| (utente.getRuolo() == Ruolo.STAFF
 				|| utente.getRuolo() == Ruolo.SUPERADMIN)){
+
+			// imposto i messaggi in sospeso a false in base all utenza e stato della chat
+			if( utente.getRuolo() == Ruolo.CLIENTE ){
+				chat.setMessaggiSospesoPerCliente(false);
+				chatRepo.save(chat);
+			}
+			else{
+				if( chat.getStato() != StatoChat.IN_ATTESA ){
+					chat.setMessaggiSospesoPerStaff(false);
+					chatRepo.save(chat);
+				}
+			}
+
 			List<Messaggio> messaggi = messageRepo.findByChat(chatId).orElseThrow(
 					() -> new MENotFoundException("Messaggio non trovato.")
 			);
+
             return chatMapper.toResponse(chat, messaggi);
 
 		}else{
@@ -99,6 +117,7 @@ public class ChatServiceJpa implements ChatService {
 	}
 
 	@Override
+	@Transactional
 	public void cambiaStatoChat(Long idChat) {
 		Chat chat = chatRepo.findById(idChat)
 			.orElseThrow(
@@ -108,6 +127,7 @@ public class ChatServiceJpa implements ChatService {
 				chat.getStato()==StatoChat.IN_ATTESA?
 						StatoChat.APERTO:StatoChat.CHIUSO
 		);
+		chatRepo.save(chat);
 	}
 
 	@Override

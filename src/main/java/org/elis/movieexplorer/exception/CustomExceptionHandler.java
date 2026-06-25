@@ -7,6 +7,7 @@ import jakarta.mail.MessagingException;
 import org.elis.movieexplorer.dto.errore.ResponseErroreDTO;
 import org.elis.movieexplorer.dto.errore.ResponseErroreValidationDTO;
 import org.elis.movieexplorer.exception.definition.*;
+import org.springframework.dao.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -97,5 +98,41 @@ public class CustomExceptionHandler {
         dto.setMessage("Utente non autorizzato.");
         dto.setPath(w.getDescription(false));
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(dto);
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<ResponseErroreDTO> dataAccessExceptionHandler(
+            DataAccessException e,
+            WebRequest w) {
+
+        ResponseErroreDTO dto = new ResponseErroreDTO();
+        dto.setPath(w.getDescription(false));
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        if (e instanceof DuplicateKeyException) {
+            dto.setMessage("I dati inseriti risultano già presenti.");
+        }
+        else if (e instanceof DataIntegrityViolationException) {
+            dto.setMessage("I dati inseriti non sono validi.");
+        }
+        else if (e instanceof EmptyResultDataAccessException) {
+            dto.setMessage("Risorsa non trovata.");
+            status = HttpStatus.NOT_FOUND;
+        }
+        else if (e instanceof PermissionDeniedDataAccessException) {
+            dto.setMessage("Operazione non consentita.");
+            status = HttpStatus.FORBIDDEN;
+        }
+        else if (e instanceof QueryTimeoutException) {
+            dto.setMessage("Operazione non completata. Riprovare più tardi.");
+            status = HttpStatus.REQUEST_TIMEOUT;
+        }
+        else {
+            dto.setMessage("Errore durante l'elaborazione della richiesta.");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return ResponseEntity.status(status).body(dto);
     }
 }

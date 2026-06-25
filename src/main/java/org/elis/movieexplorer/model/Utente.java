@@ -75,7 +75,7 @@ public class Utente implements UserDetails {
 	private List<Chat> chat;
 	
 	
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+ruolo.getNome());

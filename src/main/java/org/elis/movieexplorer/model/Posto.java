@@ -13,9 +13,10 @@ import lombok.*;
 @ToString
 public class Posto {
 
-    @Id
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @Min(0)

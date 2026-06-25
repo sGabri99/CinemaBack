@@ -17,6 +17,14 @@ import org.elis.movieexplorer.service.definition.SpettacoloService;
 @Getter
 @Setter
 @ToString
+@Table(
+	    uniqueConstraints = {
+	        @UniqueConstraint(
+	            name = "uk_spettacolo_posto",
+	            columnNames = {"spettacolo_id", "posto_id"}
+	        )
+	    }
+	)
 public class Biglietto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
