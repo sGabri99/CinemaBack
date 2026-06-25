@@ -43,11 +43,15 @@ public class InitRunConfig implements CommandLineRunner {
 		if (admin.isEmpty()) {
 		    utenteRepository.save(
 		        new Utente(
+		        		null,
 		            Ruolo.SUPERADMIN,
 		            "Admin",
 		            "System",
 		            "admin@gmail.com",
-		            "admin123"
+		            "admin123",
+		            null,
+		            null,
+		            null
 		        )
 		    );
 		}
@@ -55,11 +59,15 @@ public class InitRunConfig implements CommandLineRunner {
 		if (staff.isEmpty()) {
 		    utenteRepository.save(
 		        new Utente(
+		        		null,
 		            Ruolo.STAFF,
 		            "Mario",
 		            "Rossi",
 		            "staff@gmail.com",
-		            "staff123"
+		            "staff123",
+		            null,
+		            null,
+		            null
 		        )
 		    );
 		}
@@ -67,11 +75,15 @@ public class InitRunConfig implements CommandLineRunner {
 		if (user.isEmpty()) {
 		    utenteRepository.save(
 		        new Utente(
+		        		null,
 		            Ruolo.CLIENTE,
 		            "Giulia",
 		            "Bianchi",
 		            "user@gmail.com",
-		            "user123"
+		            "user123",
+		            null,
+		            null,
+		            null
 		        )
 		    );
 		}
@@ -82,11 +94,11 @@ public class InitRunConfig implements CommandLineRunner {
 		if (sale.isEmpty()) {
 
 		    List<Sala> saleDaInserire = List.of(
-		        new Sala("Sala IMAX Centrale", Tipo.IMAX),
-		        new Sala("Sala 3D Galaxy", Tipo.TRED),
-		        new Sala("Sala Rossa", Tipo.NORMALE),
-		        new Sala("Sala Premium IMAX", Tipo.IMAX),
-		        new Sala("Sala 3D Experience", Tipo.TRED)
+		        new Sala(null,"Sala IMAX Centrale", Tipo.IMAX,null,null),
+		        new Sala(null,"Sala 3D Galaxy", Tipo.TRED,null,null),
+		        new Sala(null,"Sala Rossa", Tipo.NORMALE,null,null),
+		        new Sala(null,"Sala Premium IMAX", Tipo.IMAX,null,null),
+		        new Sala(null,"Sala 3D Experience", Tipo.TRED,null,null)
 		    );
 
 		    List<Sala> saleSalvate = salaRepository.saveAll(saleDaInserire);
@@ -101,6 +113,7 @@ public class InitRunConfig implements CommandLineRunner {
 
 		                postiDaInserire.add(
 		                    new Posto(
+		                    		null,
 		                        fila,
 		                        colonna,
 		                        sala
