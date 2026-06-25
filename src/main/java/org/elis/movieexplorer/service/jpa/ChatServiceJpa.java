@@ -59,15 +59,15 @@ public class ChatServiceJpa implements ChatService {
 	public List<ResponseInfoChatDTO> findAllChats(Utente utente) {
 		List<Chat> chats;
 		if(utente.getRuolo() == Ruolo.CLIENTE) {
-			chats = chatRepo.findAllByUtenteIdOrderByCreatedAtDesc(utente.getId());
+			chats = chatRepo.findAllByUtenteIdOrderByCreatedAtAsc(utente.getId());
 		} else {
-			chats = chatRepo.findAllByOrderByCreatedAtDesc();
+			chats = chatRepo.findAllByOrderByCreatedAtAsc();
 		}
 		
 		return chats
 				.stream()
 				.map(c -> {
-					Messaggio ultimoMessaggio = messageRepo.findTopByChatIdOrderByCreatedAtDesc(c.getId()).orElseThrow(() -> new MENotFoundException("messaggio non trovato"));
+					Messaggio ultimoMessaggio = messageRepo.findTopByChatIdOrderByCreatedAtAsc(c.getId()).orElseThrow(() -> new MENotFoundException("messaggio non trovato"));
 					boolean messaggiInSospeso;
 					if(utente.getRuolo() == Ruolo.CLIENTE) {
 						messaggiInSospeso = c.isMessaggiSospesoPerCliente();
@@ -103,7 +103,7 @@ public class ChatServiceJpa implements ChatService {
 				}
 			}
 
-			List<Messaggio> messaggi = messageRepo.findByChatIdOrderByCreatedAtDesc(chatId);
+			List<Messaggio> messaggi = messageRepo.findByChatIdOrderByCreatedAtAsc(chatId);
 
             return chatMapper.toResponse(chat, messaggi);
 
