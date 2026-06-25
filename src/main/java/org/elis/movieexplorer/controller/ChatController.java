@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChatController {
 
-	private ChatService chatService;
+	private final ChatService chatService;
 	@Tag(name = SwaggerTags.CUSTOMER_TAG, description = SwaggerTags.CUSTOMER_TAG_DESC)
 	@Operation(
 			summary = "Creazione nuova chat",
