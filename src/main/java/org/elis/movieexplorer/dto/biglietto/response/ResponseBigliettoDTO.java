@@ -23,7 +23,9 @@ public class ResponseBigliettoDTO {
 	
 	private Long idSpettacolo;
 	
-	private Long idPosto;
+	private String fila;
+
+	private Integer colonna;
 	
 	private String codiceBiglietto;
 	
