@@ -22,36 +22,20 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class ResponseFilmDTO {
-	@EqualsAndHashCode.Exclude
-	@NotNull
 	private Long id;
 	
-	@NotBlank
 	private String titolo;
 	
-	@EqualsAndHashCode.Exclude
-	@NotBlank
 	private String descrizione;
 	
-	@EqualsAndHashCode.Exclude
-	@NotNull
-	@Range(min = 0, max = 500)
 	private Integer durata;
 	
-	@EqualsAndHashCode.Exclude
-	@NotBlank
 	private String attori;
 	
-	@EqualsAndHashCode.Exclude
-	@NotBlank
-	@URL
 	private String urlLocandina;
 
-	@EqualsAndHashCode.Exclude
 	private String urlTrailer;
 	
-	@EqualsAndHashCode.Exclude
-	@NotEmpty
 	private List<String> nomeGeneri;
 
 }

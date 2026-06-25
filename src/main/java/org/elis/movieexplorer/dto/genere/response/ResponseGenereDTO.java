@@ -18,13 +18,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class ResponseGenereDTO {
-	@EqualsAndHashCode.Exclude
-	@NotNull
 	private Long id;
 	
-	@NotBlank
 	private String nome;
 	
-	@EqualsAndHashCode.Exclude
 	private List<String> nomeFilms;
 }

@@ -15,22 +15,13 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class ResponseSalaDTO {
-	@EqualsAndHashCode.Exclude
-	@NotNull
 	private Long id;
 	
-	@NotBlank
 	private String nome;
 	
-	@EqualsAndHashCode.Exclude
-	@NotNull
-	@Range(min = 0)
 	private Integer numeroPosti;
 	
-	@EqualsAndHashCode.Exclude
-	@NotNull
 	private Tipo tipo;
-	
-	@EqualsAndHashCode.Exclude
+
 	private List<Long> idSpettacoli;
 }

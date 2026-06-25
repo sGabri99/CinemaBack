@@ -16,13 +16,9 @@ import lombok.ToString;
 @ToString
 public class ResponsePostoBySalaDTO {
 	
-	@NotNull
 	private Long id;
 	
-	@NotNull
-    @Min(1)
     private Integer colonna;
 
-    @NotNull
     private String fila;
 }

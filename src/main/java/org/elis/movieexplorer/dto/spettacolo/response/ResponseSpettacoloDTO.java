@@ -16,25 +16,14 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class ResponseSpettacoloDTO {
-	@NotNull
 	private Long id;
 
-	@EqualsAndHashCode.Exclude
-	@NotNull
-	@FutureOrPresent
 	private LocalDate data;
 
-	@EqualsAndHashCode.Exclude
-	@NotNull
 	private LocalDateTime oraInizio;
 	
-	@EqualsAndHashCode.Exclude
-	@NotNull
-	@Future
 	private LocalDateTime oraFine;
 	
-	@EqualsAndHashCode.Exclude
-	@NotNull
 	private Integer postiRimanenti;
 	
 	@EqualsAndHashCode.Exclude

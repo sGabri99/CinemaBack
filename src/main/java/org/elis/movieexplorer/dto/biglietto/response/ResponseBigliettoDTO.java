@@ -19,13 +19,10 @@ public class ResponseBigliettoDTO {
 	
 	private Long id;
 	
-	@EqualsAndHashCode.Exclude
 	private String nomeUtente;
 	
-	@EqualsAndHashCode.Exclude
 	private Long idSpettacolo;
 	
-	@EqualsAndHashCode.Exclude
 	private Long idPosto;
 	
 	private String codiceBiglietto;

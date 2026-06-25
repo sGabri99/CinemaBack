@@ -15,17 +15,12 @@ import lombok.*;
 @ToString
 public class ResponsePostoBySpettacoloDTO {
 	
-	@NotNull
 	private Long id;
 	
-	@NotNull
-    @Min(1)
     private Integer colonna;
 
-    @NotNull
     private String fila;
 
-    @NotNull
     private boolean occupato;
 
 }
