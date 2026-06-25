@@ -34,8 +34,6 @@ public class Sala {
 	private List<Spettacolo> spettacoli;
 
 	@OneToMany(mappedBy = "sala")
-	@Column(nullable= false)
-	@NotNull
 	private List<Posto> posti;
 
 }

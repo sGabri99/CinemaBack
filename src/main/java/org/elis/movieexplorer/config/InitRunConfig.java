@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.elis.movieexplorer.dto.sala.request.InsertSalaDTO;
-import org.elis.movieexplorer.dto.sala.response.ResponseSalaDTO;
-import org.elis.movieexplorer.dto.utente.response.ResponseUtenteDataDTO;
 import org.elis.movieexplorer.model.Posto;
 import org.elis.movieexplorer.model.Sala;
 import org.elis.movieexplorer.model.Utente;
@@ -15,10 +12,8 @@ import org.elis.movieexplorer.model.enums.Tipo;
 import org.elis.movieexplorer.repository.PostoRepository;
 import org.elis.movieexplorer.repository.SalaRepository;
 import org.elis.movieexplorer.repository.UtenteRepository;
-import org.elis.movieexplorer.service.definition.PostoService;
-import org.elis.movieexplorer.service.definition.SalaService;
-import org.elis.movieexplorer.service.definition.UtenteService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -27,9 +22,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class InitRunConfig implements CommandLineRunner {
 
+	private final PasswordEncoder passwordEncoder;
 	private final PostoRepository postoRepository;
 	private final SalaRepository  salaRepository;
 	private final UtenteRepository   utenteRepository;
+
+
 
 
 
@@ -48,7 +46,7 @@ public class InitRunConfig implements CommandLineRunner {
 		            "Admin",
 		            "System",
 		            "admin@gmail.com",
-		            "admin123",
+		            passwordEncoder.encode("admin123"),
 		            null,
 		            null,
 		            null
@@ -64,7 +62,7 @@ public class InitRunConfig implements CommandLineRunner {
 		            "Mario",
 		            "Rossi",
 		            "staff@gmail.com",
-		            "staff123",
+		            passwordEncoder.encode("staff123"),
 		            null,
 		            null,
 		            null
@@ -80,7 +78,7 @@ public class InitRunConfig implements CommandLineRunner {
 		            "Giulia",
 		            "Bianchi",
 		            "user@gmail.com",
-		            "user123",
+		            passwordEncoder.encode("user123"),
 		            null,
 		            null,
 		            null
