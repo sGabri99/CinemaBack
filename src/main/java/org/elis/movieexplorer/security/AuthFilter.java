@@ -61,10 +61,12 @@ public class AuthFilter extends OncePerRequestFilter {
 					utente.getAuthorities());
 			upat.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 			securityContext.setAuthentication(upat);
-			filterChain.doFilter(request, response);
 		}catch (Exception e){
 			resolver.resolveException(request, response, null, e);
+			return;
 		}
+
+		filterChain.doFilter(request, response);
 	}
 	
 }

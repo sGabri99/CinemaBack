@@ -21,6 +21,5 @@ public class InsertBigliettoDTO {
 	@Positive
 	private Long idSpettacolo;
 	
-	@Positive
-	private List<Integer> idPosti;
+	private List<@Positive Integer> idPosti;
 }
