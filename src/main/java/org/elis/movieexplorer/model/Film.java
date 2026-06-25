@@ -38,32 +38,24 @@ public class Film {
 	private String imdbID;
 	
 	@Column(nullable = false, unique = true)
-	@NotBlank
 	private String titolo;
 	
 	@Column(nullable = false)
-	@NotBlank
 	private String descrizione;
 	
 	@Column(nullable = false)
-	@NotNull
 	@Range(min = 0, max = 500)
 	private Integer durata;
 	
 	@Column(nullable = false)
-	@NotBlank
 	private String attori;
 	
 	@Column(nullable = false)
-	@NotNull
-	@URL
 	private String urlLocandina;
 
-	@Column
 	private String urlTrailer;
 	
 	@ManyToMany
-	@NotEmpty
 	private List<Genere> generi;
 	
 	@OneToMany(mappedBy = "film")

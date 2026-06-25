@@ -29,7 +29,6 @@ public class Genere {
 	private Long id;
 	
 	@Column(nullable = false, unique = true)
-	@NotBlank
 	private String nome;
 	
 	@ManyToMany(mappedBy="generi")

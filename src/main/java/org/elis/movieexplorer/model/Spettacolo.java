@@ -22,19 +22,15 @@ public class Spettacolo {
 	private Long id;
 	
 	@Column(nullable = false)
-	@NotNull
 	private LocalDate data;
 	
 	@Column(nullable = false)
-	@NotNull
 	private LocalDateTime oraInizio;
 	
 	@Column(nullable = false)
-	@NotNull
 	private LocalDateTime oraFine;
 	
 	@Column(nullable = false)
-	@NotNull
 	@Range(min = 0)
 	private Integer postiRimanenti;
 	
@@ -43,11 +39,9 @@ public class Spettacolo {
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
-	@NotNull
 	private Sala sala;
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
-	@NotNull
 	private Film film;
 }

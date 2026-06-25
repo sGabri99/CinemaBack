@@ -45,24 +45,18 @@ public class Utente implements UserDetails {
 	
 	@Column(nullable = false)
 	@EqualsAndHashCode.Exclude
-	@NotNull
 	private Ruolo ruolo;
 	
 	@Column(nullable = false)
-	@NotBlank
 	private String nome;
 	
 	@Column(nullable = false)
-	@NotBlank
 	private String cognome;
 	
 	@Column(nullable = false, unique = true)
-	@Email
-	@NotNull
 	private String email;
 
 	@Column(nullable = false)
-	@NotBlank
 	private String password;
 	
 	@OneToMany(mappedBy = "utente")

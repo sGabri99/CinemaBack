@@ -18,15 +18,14 @@ public class Posto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     @Min(0)
 	private int fila;
 
-    @NotNull
+    @Column(nullable = false)
     @Min(1)
 	private int colonna;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(nullable = false)
     private Sala sala;

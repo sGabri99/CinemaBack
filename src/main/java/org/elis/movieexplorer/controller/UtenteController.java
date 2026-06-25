@@ -67,6 +67,7 @@ public class UtenteController {
     @BadRequestApiResponse
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody @Valid LoginRequestDTO request) {
+        System.out.println("Prova");
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, utenteService.login(request)).build();
     }
 
