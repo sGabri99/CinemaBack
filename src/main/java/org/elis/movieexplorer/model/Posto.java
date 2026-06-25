@@ -13,7 +13,15 @@ import lombok.*;
 @ToString
 public class Posto {
 
-    @Id
+    public Posto(int fila, int colonna, Sala sala) {
+
+    	this.fila = fila;
+    	this.colonna = colonna;
+    	this.sala = sala;
+    	
+    }
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 

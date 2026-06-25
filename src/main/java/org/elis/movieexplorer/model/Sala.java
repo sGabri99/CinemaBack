@@ -17,6 +17,11 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Sala {
+	public Sala(String nome, Tipo tipo) {
+		this.nome = nome;
+		this.tipo = tipo;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
