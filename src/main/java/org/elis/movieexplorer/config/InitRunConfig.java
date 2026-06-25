@@ -217,12 +217,10 @@ public class InitRunConfig implements CommandLineRunner {
 		try {
 			if (chatRepository.count() == 0 && user1 != null && staff1 != null) {
 				// Creazione Chat (8 parametri: id, oggetto, stato, createdAt, sospesoStaff, sospesoCliente, listaMessaggi, utente)
-				Chat chat1 = chatRepository.save(new Chat(null, "Problema visualizzazione biglietto", StatoChat.APERTO, LocalDateTime.now().minusHours(2), false, false, new ArrayList<>(), user1));
+				Chat chat1 = chatRepository.save(new Chat(null, "Problema visualizzazione biglietto", StatoChat.IN_ATTESA, null, true, false, null, user1));
 				
 				// Creazione messaggi (5 parametri: id, messaggio, createdAt, chat, mittente)
-				messaggioRepository.save(new Messaggio(null, "Salve, ho pagato ma non vedo il biglietto.", LocalDateTime.now().minusHours(2), chat1, user1));
-				// Nota: il metodo @PostPersist di Messaggio sposterà automaticamente lo stato di messaggiSospesoPerStaff/Cliente in base al mittente!
-				messaggioRepository.save(new Messaggio(null, "Buongiorno Giulia, stiamo verificando il pagamento.", LocalDateTime.now().minusHours(1), chat1, staff1));
+				messaggioRepository.save(new Messaggio(null, "Salve, ho pagato ma non vedo il biglietto.", null, chat1, user1));
 			}
 		} catch (Exception e) {
 			System.err.println("❌ Errore durante la creazione delle chat: " + e.getMessage());
