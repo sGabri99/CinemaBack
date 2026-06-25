@@ -16,6 +16,7 @@ public class PostoMapper {
 		List<ResponsePostoBySalaDTO> listaDTO = new ArrayList<>();
 		for(Posto p : posti) {
 			ResponsePostoBySalaDTO dto = new ResponsePostoBySalaDTO();
+			dto.setId(p.getId());
 			dto.setColonna(p.getColonna());
 			dto.setFila(String.valueOf((char) (p.getFila() + 65)));
 			listaDTO.add(dto);
@@ -27,6 +28,7 @@ public class PostoMapper {
 		List<ResponsePostoBySpettacoloDTO> listaDTO = new ArrayList<>();
 		for(Posto p : posti) {
 			ResponsePostoBySpettacoloDTO dto = new ResponsePostoBySpettacoloDTO();
+			dto.setId(p.getId());
 			dto.setColonna(p.getColonna());
 			dto.setFila(String.valueOf((char) (p.getFila() + 65)));
 			dto.setOccupato(idPostiOccupati.contains(p.getId()));

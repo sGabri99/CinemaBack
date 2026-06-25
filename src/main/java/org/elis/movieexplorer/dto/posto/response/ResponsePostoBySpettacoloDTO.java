@@ -16,6 +16,9 @@ import lombok.*;
 public class ResponsePostoBySpettacoloDTO {
 	
 	@NotNull
+	private Long id;
+	
+	@NotNull
     @Min(1)
     private Integer colonna;
 
